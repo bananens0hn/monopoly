@@ -18,7 +18,8 @@ public class Game {
 		frame.setVisible(true);
 	}
 	
-	public void update() {
+	public void update() { 
+		
 		
 	}
 	
