@@ -1,6 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
@@ -8,9 +12,10 @@ public class Board extends JPanel{
 	Field fieldArray [];
 	String fieldNameArray [];
 	int rowSize = 9;
-	int shortSideField = 70;
-	int longSideField = 110;
+	int shortSideField = 100;
+	int longSideField = 125;
 	int heightColorRectangle = 20;
+	
 	
 	public Board() {
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -93,38 +98,58 @@ public class Board extends JPanel{
 		super.paintComponent(g);
 	
 		for(int i = 0; i < rowSize *4; i++) {
-			//Kästchen
-			g.setColor(Color.BLACK);
-			g.drawRect(fieldArray[i].xPosition, fieldArray[i].yPosition, fieldArray[i].width, fieldArray[i].height);
+			
 			
 			
 			//farbige Blöcke und Name der Felder
 			switch(fieldArray[i].orientation) {
-			case 0:
-				g.setColor(Color.RED);
+			case 0:			//rechts -> links oben
+				g.setColor(Color.red);
 				g.fillRect(fieldArray[i].xPosition, fieldArray[i].yPosition + fieldArray[i].height - heightColorRectangle, fieldArray[i].width, heightColorRectangle);
 				g.setColor(Color.BLACK);
-				g.drawString(fieldArray[i].fieldName, fieldArray[i].xPosition, fieldArray[i].yPosition + fieldArray[i].height);
+				//g.drawString(fieldArray[i].fieldName, fieldArray[i].xPosition, fieldArray[i].yPosition + fieldArray[i].height);
 				break;
-			case 1:
+			case 1:		//rechts -> links unten
 				g.setColor(Color.GREEN);
 				g.fillRect(fieldArray[i].xPosition, fieldArray[i].yPosition, fieldArray[i].width, heightColorRectangle);
 				g.setColor(Color.BLACK);
-				g.drawString(fieldArray[i].fieldName, fieldArray[i].xPosition, fieldArray[i].yPosition);
+				//g.drawString(fieldArray[i].fieldName, fieldArray[i].xPosition, fieldArray[i].yPosition);
 				break;
-			case 2:
+			case 2:		//oben -> unten links
 				g.setColor(Color.YELLOW);
 				g.fillRect(fieldArray[i].xPosition + fieldArray[i].width - heightColorRectangle, fieldArray[i].yPosition, heightColorRectangle, fieldArray[i].height);
 				g.setColor(Color.BLACK);
-				g.drawString(fieldArray[i].fieldName, fieldArray[i].xPosition + fieldArray[i].width, fieldArray[i].yPosition);
+				//g.drawString(fieldArray[i].fieldName, fieldArray[i].xPosition + fieldArray[i].width, fieldArray[i].yPosition);
 				break;
-			case 3:
+			case 3:		//oben -> unten rechts
 				g.setColor(Color.BLUE);
 				g.fillRect(fieldArray[i].xPosition, fieldArray[i].yPosition, heightColorRectangle, fieldArray[i].height);
 				g.setColor(Color.BLACK);
-				g.drawString(fieldArray[i].fieldName, fieldArray[i].xPosition, fieldArray[i].yPosition);
+				//g.drawString(fieldArray[i].fieldName, fieldArray[i].xPosition, fieldArray[i].yPosition);
 				break;
 			}
+			//draw the tiles --- zeichne die Felder(Kästchen)
+			g.setColor(Color.BLACK);
+			g.drawRect(fieldArray[i].xPosition, fieldArray[i].yPosition, fieldArray[i].width, fieldArray[i].height);
 		}
+		//draw images ---- zeichne die Bilder der jeweiligen Symbole auf dem Feld
+		try {
+			g.drawImage(ImageIO.read(new URL("https://i1.wp.com/www.mallorca-services.es/wp-content/uploads/FreiParken.jpg")), fieldArray[0].xPosition-125, fieldArray[0].yPosition, 125, 125, null);
+			g.drawImage(ImageIO.read(new URL("http://www.rhein-zeitung.de/cms_media/module_img/1044/522467_1_popup_522467_1_org_knast.jpg")), fieldArray[9].xPosition, fieldArray[8].yPosition, 125, 125, null);
+			g.drawImage(ImageIO.read(new URL("https://www.brettspiele-report.de/images/monopoly/monopoly_eckfelder_go_los.jpg")), fieldArray[17].xPosition, fieldArray[18].yPosition, 125, 125, null);
+			g.drawImage(ImageIO.read(new URL("https://www.brettspiele-report.de/images/monopoly_trauminsel/monopoly_trauminsel_eckfelder_gefaengnis.jpg")), fieldArray[27].xPosition, fieldArray[26].yPosition, 125, 125, null);
+
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//draw rectangles for the corner of the board ---- zeichne rechtecke für die ecken des bretts
+		g.drawRect(fieldArray[0].xPosition-125, fieldArray[0].yPosition, 125, 125);
+		g.drawRect(fieldArray[9].xPosition, fieldArray[8].yPosition, 125, 125);
+		g.drawRect(fieldArray[17].xPosition, fieldArray[18].yPosition, 125, 125);
+		g.drawRect(fieldArray[27].xPosition, fieldArray[26].yPosition, 125, 125);
+		
+		//g.fillRect(fieldArray[0].xPosition-125, fieldArray[0].yPosition, 125, 125);
 	}
 }
