@@ -1,28 +1,35 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Board extends JPanel{
 	Field fieldArray [];
 	String fieldNameArray [];
 	int rowSize = 9;
-	int shortSideField = 70;
-	int longSideField = 110;
+	int shortSideField;
+	int longSideField;
 	int heightColorRectangle = 20;
 	
-	public Board() {
+	public Board(JFrame frame) {
+		
+		//board maximized in window ----- Spielbrett im Fenster maximiert
+		longSideField = Toolkit.getDefaultToolkit().getScreenSize().height/(rowSize - 2);
+		shortSideField = Toolkit.getDefaultToolkit().getScreenSize().height/rowSize - longSideField*2/rowSize;
+		
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		fieldArray = new Field[rowSize*4];
 		fieldNameArray = new String[rowSize*4];
 		
-		setFieldNames();
+		setFieldProperties();
 		setPositionofFields();
 	}
 
-	private void setFieldNames() {
+	private void setFieldProperties() {
 		fieldNameArray[0] = "a";
 		fieldNameArray[1] = "n";
 		fieldNameArray[2] = "d";
