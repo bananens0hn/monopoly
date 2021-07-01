@@ -8,16 +8,23 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import java.awt.Toolkit;
+
 public class Board extends JPanel{
 	Field fieldArray [];
 	String fieldNameArray [];
 	int rowSize = 9;
-	int shortSideField = 100;
-	int longSideField = 125;
+	int shortSideField;
+	int longSideField;
 	int heightColorRectangle = 20;
 	
 	
 	public Board() {
+		
+		//board maximized in window ----- Spielbrett im Fenster maximiert
+		longSideField = Toolkit.getDefaultToolkit().getScreenSize().height/(rowSize - 2);
+		shortSideField = Toolkit.getDefaultToolkit().getScreenSize().height/rowSize - longSideField*2/rowSize;
+		
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		fieldArray = new Field[rowSize*4];
