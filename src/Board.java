@@ -29,49 +29,10 @@ public class Board extends JPanel{
 		
 		fieldArray = new Field[rowSize*4];
 		fieldNameArray = new String[rowSize*4];
-		
-		setFieldNames();
 		setPositionofFields();
 	}
 
-	private void setFieldNames() {
-		fieldNameArray[0] = "a";
-		fieldNameArray[1] = "n";
-		fieldNameArray[2] = "d";
-		fieldNameArray[3] = "a";
-		fieldNameArray[4] = "s";
-		fieldNameArray[5] = "f";
-		fieldNameArray[6] = "ü";
-		fieldNameArray[7] = "r";
-		fieldNameArray[8] = "f";
-		fieldNameArray[9] = "o";
-		fieldNameArray[10] = "r";
-		fieldNameArray[11] = "t";
-		fieldNameArray[12] = "n";
-		fieldNameArray[13] = "i";
-		fieldNameArray[14] = "t";
-		fieldNameArray[15] = "e";
-		fieldNameArray[16] = "a";
-		fieldNameArray[17] = "a";
-		fieldNameArray[18] = "a";
-		fieldNameArray[19] = "a";
-		fieldNameArray[20] = "a";
-		fieldNameArray[21] = "a";
-		fieldNameArray[22] = "a";
-		fieldNameArray[23] = "a";
-		fieldNameArray[24] = "a";
-		fieldNameArray[25] = "a";
-		fieldNameArray[26] = "a";
-		fieldNameArray[27] = "a";
-		fieldNameArray[28] = "a";
-		fieldNameArray[29] = "a";
-		fieldNameArray[30] = "a";
-		fieldNameArray[31] = "a";
-		fieldNameArray[32] = "a";
-		fieldNameArray[33] = "a";
-		fieldNameArray[34] = "a";
-		fieldNameArray[35] = "a";
-		}
+
 
 	//position der Felder
 	private void setPositionofFields() {
