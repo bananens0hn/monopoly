@@ -15,6 +15,7 @@ public class Game {
 		frame = new JFrame("fortnite");
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.add(new Board());
+		frame.setUndecorated(true);
 		frame.setVisible(true);
 	}
 	
