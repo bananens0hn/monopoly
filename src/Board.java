@@ -40,7 +40,7 @@ public class Board extends JPanel{
 		
 		//untere Reihe
 		
-		for (int i = 0; i < rowSize ; i++) {
+		for (int i = 1; i < rowSize ; i++) {
 			fieldArray[i] = new Field(fieldNameArray[i], (rowSize - i - 1) * shortSideField + longSideField , rowSize * shortSideField + longSideField, shortSideField, longSideField, 1);
 		}
 		
@@ -62,6 +62,12 @@ public class Board extends JPanel{
 		for (int i = 3 * rowSize; i < rowSize * 4 ; i++) {
 			fieldArray[i] = new Field(fieldNameArray[i], shortSideField * rowSize + longSideField, (i - 3 * rowSize) * shortSideField + longSideField, longSideField, shortSideField, 3);
 		}
+		
+		//Eckfelder
+		fieldArray[0] = new Field(FieldInformations.values()[0].name(), shortSideField * (rowSize - 1) + longSideField, shortSideField * (rowSize - 1) + longSideField, longSideField, longSideField, 4);
+		fieldArray[0] = new Field(FieldInformations.values()[10].name(), shortSideField * (rowSize - 1) + longSideField, shortSideField * (rowSize - 1) + longSideField, longSideField, longSideField, 4);
+		fieldArray[0] = new Field(FieldInformations.values()[20].name(), shortSideField * (rowSize - 1) + longSideField, shortSideField * (rowSize - 1) + longSideField, longSideField, longSideField, 4);
+		fieldArray[0] = new Field(FieldInformations.values()[30].name(), shortSideField * (rowSize - 1) + longSideField, shortSideField * (rowSize - 1) + longSideField, longSideField, longSideField, 4);
 		
 	}
 
