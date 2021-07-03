@@ -8,7 +8,7 @@ public class Game {
 	Player player1;
 	
 	public Game() {
-		player1 = new Player(0, "hans", "Kreis");
+		player1 = new Player(0, "hans", "Kreis", 0);
 	}
 	
 	public void setupGame() {

@@ -1,49 +1,56 @@
 
 
 public enum FieldInformations {
-	LOS				(-1),
-	BRAUN_1			(60),
-	GEMEINSCHAFT_1	(-1),
-	BRAUN_2			(60),
-	STEUER_1		(-1),
-	BAHNHOF_1		(200),
-	HELLBLAU_1		(100),
-	EREIGNIS_1		(-1),
-	HELLBLAU_2		(100),
-	HELLBLAU_3		(120),
-	GEFÄNGNIS		(-1),
-	LILA_1			(140),
-	WERK_1			(150),
-	LILA_2			(140),
-	LILA_3			(160),
-	BAHNHOF_2		(200),
-	ORANGE_1		(180),
-	GEMEINSCHAFT_2	(-1),
-	ORANGE_2		(180),
-	ORANGE_3		(200),
-	FREI_PARKEN		(-1),
-	ROT_1			(220),
-	EREIGNIS_2		(-1),
-	ROT_2			(220),
-	ROT_3			(240),
-	BAHNHOF_3		(200),
-	GELB_1			(260),
-	GELB_2			(260),
-	WERK_2			(150),
-	GELB_3			(280),
-	GEHE_GEFÄNGNIS	(-1),
-	GRÜN_1			(300),
-	GRÜN_2			(300),
-	GEMEINSCHAFT_3	(-1),
-	GRÜN_3			(320),
-	BAHNHOF_4		(200),
-	EREIGNIS_3		(-1),
-	DUNKELBLAU_1	(350),
-	STEUER_2		(-1),
-	DUNKELBLAU		(400);
-	public final int price;
+	//untere spalte
+	LOS				(-1, ""),
+	BRAUN_1			(60, "brown"),
+	GEMEINSCHAFT_1	(-1, "none1"),
+	BRAUN_2			(60, "brown"),
+	STEUER_1		(-1, "none1"),
+	BAHNHOF_1		(200, "none1"),
+	HELLBLAU_1		(100, "lightblue"),
+	EREIGNIS_1		(-1, "none1"),
+	HELLBLAU_2		(100, "lightblue"),
+	HELLBLAU_3		(120, "lightblue"),
+	//linke spalte
+	GEFÄNGNIS		(-1, ""),
+	LILA_1			(140, "purple"),
+	WERK_1			(150, "none2"),
+	LILA_2			(140, "purple"),
+	LILA_3			(160, "purple"),
+	BAHNHOF_2		(200, "none2"),
+	ORANGE_1		(180, "orange"),
+	GEMEINSCHAFT_2	(-1, "none2"),
+	ORANGE_2		(180, "orange"),
+	ORANGE_3		(200, "orange"),
+	//obere spalte
+	FREI_PARKEN		(-1, ""),
+	ROT_1			(220, "red"),
+	EREIGNIS_2		(-1, "none3"),
+	ROT_2			(220, "red"),
+	ROT_3			(240, "red"),
+	BAHNHOF_3		(200, "none3"),
+	GELB_1			(260, "yellow"),
+	GELB_2			(260, "yellow"),
+	WERK_2			(150, "none3"),
+	GELB_3			(280, "yellow"),
+	//rechte spalte
+	GEHE_GEFÄNGNIS	(-1, ""),
+	GRÜN_1			(300, "green"),
+	GRÜN_2			(300, "green"),
+	GEMEINSCHAFT_3	(-1, "none4"),
+	GRÜN_3			(320, "green"),
+	BAHNHOF_4		(200, "none4"),
+	EREIGNIS_3		(-1, "none4"),
+	DUNKELBLAU_1	(350, "blue"),
+	STEUER_2		(-1, "none4"),
+	DUNKELBLAU_2	(400, "blue");
 	
-	private FieldInformations(int price) {
+	public final int price;
+	public final String color;
+	
+	private FieldInformations(int price, String color) {
 		this.price = price;
+		this.color = color;
 	}
 }
