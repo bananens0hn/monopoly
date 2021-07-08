@@ -45,7 +45,7 @@ public class Menu {
            
 
             gbc.anchor = GridBagConstraints.CENTER;
-            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.fill = GridBagConstraints.HORIZONTAL; //
 
             JButton btnStart = new JButton("Start");
             btnStart.setBackground(Color.RED);
