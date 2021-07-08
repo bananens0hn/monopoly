@@ -9,7 +9,7 @@ public class Game {
 	int windowWidth = 1080;
 	int windowHeight = 720;
 	
-	JButton btnStart;
+	//JButton btnStart;
 	
 	Player player1;
 	
@@ -17,7 +17,7 @@ public class Game {
 		player1 = new Player(0, "hans", "Kreis", 0);
 		
 		//set Button
-		btnStart = new JButton("Start");
+		/*btnStart = new JButton("Start");
 		
 		 btnStart.addActionListener(new ActionListener(){
 	    	  public void actionPerformed(ActionEvent e){
@@ -27,14 +27,14 @@ public class Game {
 	    	             
 	    	  }
 	      }
-	      );
+	      );*/
 		
 	}
 	
 	public void setupGame() {
 		frame = new JFrame("fortnite");
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		frame.add(btnStart);
+		//frame.add(btnStart);
 		frame.setUndecorated(true);
 		frame.setVisible(true);
 	}
