@@ -7,49 +7,25 @@ import javax.swing.JFrame;
 
 public class Game extends JFrame{
 	JFrame frame;
+	Menu menu ;
+	Board board;
 	int windowWidth = 1080;
 	int windowHeight = 720;
 	
-	//JButton btnStart;
-	
-	
-	Board board;
 	public Game() {
-		
-		
-		//set Button
-<<<<<<< HEAD
-		/*btnStart = new JButton("Start");
-		
-=======
-		btnStart = new JButton("Start");
-		board=new Board();
->>>>>>> branch 'benni_branch' of https://github.com/bananens0hn/monopoly
-		 btnStart.addActionListener(new ActionListener(){
-	    	  public void actionPerformed(ActionEvent e){
-	    		  btnStart.setVisible(false);
-	    		  // Vielleicht ein Käfer Fehler
-	    		  frame.add(board);
-	    	             
-	    	  }
-	      }
-	      );*/
-		
+		menu = new Menu(this);
+		board = new Board();
 	}
 	
 	public void setupGame() {
 		frame = new JFrame("fortnite");
 		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		//frame.add(btnStart);
+		frame.add(menu);
 		frame.setUndecorated(true);
 		frame.setVisible(true);
 	}
 	
-	public void update() {
-		
-	}
-	
-	public void render() {
-		
+	public void setBoard() {
+		frame.add(board);
 	}
 }

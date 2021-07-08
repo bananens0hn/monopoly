@@ -1,5 +1,6 @@
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
@@ -11,9 +12,11 @@ import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeListener;
 
@@ -21,8 +24,6 @@ public class Board extends JPanel{
 	Field fieldArray [];
 	String fieldNameArray [];
 	int rowSize = 10;
-	int shortSideField;
-	int longSideField;
 	int heightColorRectangle = 20;
 	
 	//corner images
@@ -34,80 +35,33 @@ public class Board extends JPanel{
 	boolean isDiceRolling;
 	public Dice dice;
 	public Player player;
-	public JButton button;
-	public boolean isStart;
+	public JButton diceButton;
+	public boolean isStart = true;
+	
+	private int windowHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+	private int windowWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+	
+	private int longSideField = windowHeight/(rowSize - 2) ;
+	private int shortSideField = windowHeight/(rowSize - 1) - longSideField*2/(rowSize - 1);
 	
 	
 	public Board() {
-		player=new Player(0,"hans", "schiff du huan", 0);
 		
-		dice=new Dice();
+		player = new Player(0,"hans", "schiff", 0);
 		
-		button=new JButton(new Action() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				isDiceRolling=true;
-				System.out.println(player.getPosition());
-				repaint();
-				
-			}
-			
-			@Override
-			public void setEnabled(boolean b) {
-				
-				
-			}
-			
-			@Override
-			public void removePropertyChangeListener(PropertyChangeListener listener) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void putValue(String key, Object value) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public boolean isEnabled() {
-				// TODO Auto-generated method stub
-				return true;
-			}
-			
-			@Override
-			public Object getValue(String key) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public void addPropertyChangeListener(PropertyChangeListener listener) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		dice = new Dice();
 		
-		button.setText("huan");
-		
-		isStart=true;
-		
-		this.add(button);
-		
-		//board maximized in window ----- Spielbrett im Fenster maximiert
-		longSideField = Toolkit.getDefaultToolkit().getScreenSize().height/(rowSize - 2) ;
-		shortSideField = Toolkit.getDefaultToolkit().getScreenSize().height/(rowSize - 1) - longSideField*2/(rowSize - 1);
+		setDiceButton();
 		
 		setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		fieldArray = new Field[rowSize*4];
 		fieldNameArray = new String[rowSize*4];
+		
 		setPositionofFields();
 		
 		
-		// eckbilder links setzen 
+		// eckbilder urls setzen 
 		try {
 			los = ImageIO.read(new URL("https://www.brettspiele-report.de/images/monopoly/monopoly_eckfelder_go_los.jpg"));
 			knast = ImageIO.read(new URL("https://www.brettspiele-report.de/images/monopoly_trauminsel/monopoly_trauminsel_eckfelder_gefaengnis.jpg"));
@@ -157,6 +111,24 @@ public class Board extends JPanel{
 		fieldArray[20] = new Field(FieldInformations.values()[20].name(), 0, 0, longSideField, longSideField, 4);
 		fieldArray[30] = new Field(FieldInformations.values()[30].name(), shortSideField * (rowSize - 1) + longSideField, 0, longSideField, longSideField, 4);
 		
+	}
+	
+	private void setDiceButton() {
+		diceButton = new JButton("Würfeln");
+		
+		diceButton.setPreferredSize(new Dimension(longSideField, longSideField));
+		diceButton.setBorder(new EmptyBorder(10, 10, 10, 10));
+		
+		//würfel button onclick 
+		diceButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				isDiceRolling=true;
+				System.out.println(player.getPosition());
+				repaint();
+				
+			}});
+
+		this.add(diceButton);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -244,10 +216,13 @@ public class Board extends JPanel{
 		g.drawImage(freiParken, fieldArray[2*rowSize].xPosition, fieldArray[2*rowSize].yPosition, longSideField, longSideField, null);
 		g.drawImage(geheKnast, fieldArray[3*rowSize].xPosition, fieldArray[3*rowSize].yPosition, longSideField, longSideField, null);
 		
+		//Player auf start setzen
 		
 		if(isStart==true) {
 			g.fillRect(fieldArray[0].xPosition+fieldArray[0].width/2-50, fieldArray[0].yPosition+fieldArray[0].height/2-50, 100,100);
 		}
+		
+		//Player position update
 		
 		if(isDiceRolling) {
 			
@@ -256,7 +231,6 @@ public class Board extends JPanel{
 			isDiceRolling=false;
 			isStart=false;
 			
-			System.out.println("dice: "+x);
 			paintComponent(g);
 			
 			player.setPosition(player.getPosition()+x);

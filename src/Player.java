@@ -32,12 +32,13 @@ public class Player {
 	
 	//Position
 	public void setPosition(int num) {
+		
 		if(num>39) {
-		position=num-40;
-		System.out.println("overflowed");
+			position=num-40;
 		}else {
 			position = num;
 		}
+		
 	}
 	
 	public int getPosition() {
