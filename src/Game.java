@@ -1,29 +1,35 @@
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class Game {
+public class Game extends JFrame{
 	JFrame frame;
 	int windowWidth = 1080;
 	int windowHeight = 720;
 	
 	//JButton btnStart;
 	
-	Player player1;
 	
+	Board board;
 	public Game() {
-		player1 = new Player(0, "hans", "Kreis", 0);
+		
 		
 		//set Button
+<<<<<<< HEAD
 		/*btnStart = new JButton("Start");
 		
+=======
+		btnStart = new JButton("Start");
+		board=new Board();
+>>>>>>> branch 'benni_branch' of https://github.com/bananens0hn/monopoly
 		 btnStart.addActionListener(new ActionListener(){
 	    	  public void actionPerformed(ActionEvent e){
 	    		  btnStart.setVisible(false);
 	    		  // Vielleicht ein Käfer Fehler
-	    		  frame.add(new Board());
+	    		  frame.add(board);
 	    	             
 	    	  }
 	      }
@@ -39,7 +45,7 @@ public class Game {
 		frame.setVisible(true);
 	}
 	
-	public void update() { 
+	public void update() {
 		
 	}
 	

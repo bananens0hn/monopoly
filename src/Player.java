@@ -1,5 +1,5 @@
 public class Player {
-	public int position;
+	private int position;
 	public String figure;
 	public int playerNum;
 	public String playerName;
@@ -32,7 +32,12 @@ public class Player {
 	
 	//Position
 	public void setPosition(int num) {
-		position = num;
+		if(num>39) {
+		position=num-40;
+		System.out.println("overflowed");
+		}else {
+			position = num;
+		}
 	}
 	
 	public int getPosition() {
