@@ -1,26 +1,19 @@
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.io.File;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeListener;
 
 public class Board extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	Field fieldArray [];
 	String fieldNameArray [];
 	int rowSize = 10;
@@ -71,7 +64,7 @@ public class Board extends JPanel{
 
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}}
 
@@ -203,23 +196,22 @@ public class Board extends JPanel{
 		
 		if(isStart == true) {
 			g.fillRect(fieldArray[0].xPosition+fieldArray[0].width/2-50, fieldArray[0].yPosition+fieldArray[0].height/2-50, 100,100);
+			isStart = false;
 		}
 		
 		//Player position update
 		
 		if(isDiceRolling) {
-			Dice dice = new Dice();
-			
-			int x = dice.roll();
+
 			
 			isDiceRolling = false;
-			isStart = false;
+			
 			
 			paintComponent(g);
 			
-			player.setPosition(player.getPosition() + x);
+			player.setPosition(player.getPosition() + movingDistance);
 			g.fillRect(fieldArray[player.getPosition()].xPosition + fieldArray[player.getPosition()].width/2-50, fieldArray[player.getPosition()].yPosition + fieldArray[player.getPosition()].height/2-50, 100,100);
-			
+		
 		}
 
 	}

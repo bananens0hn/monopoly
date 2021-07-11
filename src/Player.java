@@ -33,7 +33,7 @@ public class Player {
 	//Position
 	public void setPosition(int num) {
 		
-		if(num>39) {
+		if(num>39) {			//board is only 40 tiles big
 			position=num-40;
 		}else {
 			position = num;

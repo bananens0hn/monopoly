@@ -1,4 +1,3 @@
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -7,12 +6,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 public class BoardInformationMenu extends JPanel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//public boolean isDiceRolling;
-	private Dice dice;
 	private JButton diceButton;
 	private Board board;
 	
@@ -34,7 +35,7 @@ public class BoardInformationMenu extends JPanel {
 	
 	private void setDiceButton() {
 
-		dice = new Dice();
+
 		diceButton = new JButton("Würfeln");
 		this.add(diceButton);
 		

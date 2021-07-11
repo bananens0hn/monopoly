@@ -1,10 +1,10 @@
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 public class Game extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	JFrame frame;
 	Menu menu ;
 	int windowWidth = 1080;

@@ -1,11 +1,10 @@
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Toolkit;
-
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public BoardInformationMenu boardMenu;
 	public Board board;
 	
