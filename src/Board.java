@@ -10,9 +10,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class Board extends JPanel{
-	/**
-	 * 
-	 */
+
+	public Player[] players;
+	private int activePlayerIndex = 0;
+	
 	private static final long serialVersionUID = 1L;
 	Field fieldArray [];
 	String fieldNameArray [];
@@ -24,8 +25,7 @@ public class Board extends JPanel{
 	private BufferedImage knast;
 	private BufferedImage freiParken;
 	private BufferedImage geheKnast;
-	
-	public Player player;
+
 	private boolean isStart = true;
 	
 	public int windowHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -42,12 +42,16 @@ public class Board extends JPanel{
 	public int dice2value;
 	
 	public Board() {
+		players = new Player[3];
+
+		players[0] = new Player(0, "hans", "Kreis", 0);
+		players[1] = new Player(0, "Jesus", "Viereck", 0);
+		players[2] = new Player(0, "Jesus", "Viereck", 0);
+		
 		dice = new Dice();
 		
 		//set size of jpanel
 		this.setPreferredSize(new Dimension(windowWidth / 4 * 3, windowHeight));
-		
-		player = new Player(0,"hans", "schiff", 0);
 		
 		fieldArray = new Field[rowSize*4];
 		fieldNameArray = new String[rowSize*4];
@@ -192,13 +196,6 @@ public class Board extends JPanel{
 		g.drawImage(freiParken, fieldArray[2*rowSize].xPosition, fieldArray[2*rowSize].yPosition, longSideField, longSideField, null);
 		g.drawImage(geheKnast, fieldArray[3*rowSize].xPosition, fieldArray[3*rowSize].yPosition, longSideField, longSideField, null);
 		
-		//Player auf start setzen
-		
-		if(isStart == true) {
-			g.fillRect(fieldArray[0].xPosition+fieldArray[0].width/2-50, fieldArray[0].yPosition+fieldArray[0].height/2-50, 100,100);
-			isStart = false;
-		}
-		
 		//Player position update
 		
 		if(isDiceRolling) {
@@ -209,9 +206,11 @@ public class Board extends JPanel{
 			
 			paintComponent(g);
 			
-			player.setPosition(player.getPosition() + movingDistance);
-			g.fillRect(fieldArray[player.getPosition()].xPosition + fieldArray[player.getPosition()].width/2-50, fieldArray[player.getPosition()].yPosition + fieldArray[player.getPosition()].height/2-50, 100,100);
-		
+			players[activePlayerIndex].setPosition(players[activePlayerIndex].getPosition() + movingDistance);
+			
+			for (int i = 0; i < players.length; i++) {
+				g.fillRect(fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20, 40,40);
+			}
 		}
 
 	}
@@ -221,6 +220,14 @@ public class Board extends JPanel{
 		movingDistance = dice.roll();
 		dice1value = dice.first;
 		dice2value = dice.second;
-		repaint();
+		repaint(); 
+	}
+	
+	public void nextTurn() {
+		if(activePlayerIndex < players.length - 1) {
+			activePlayerIndex++;
+		} else {
+			activePlayerIndex = 0;
+		}
 	}
 }

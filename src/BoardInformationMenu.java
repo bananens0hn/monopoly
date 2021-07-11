@@ -15,6 +15,7 @@ public class BoardInformationMenu extends JPanel {
 	private static final long serialVersionUID = 1L;
 	//public boolean isDiceRolling;
 	private JButton diceButton;
+	private JButton nextTurnButton;
 	private Board board;
 	
 	//dice numbers
@@ -30,11 +31,12 @@ public class BoardInformationMenu extends JPanel {
 		this.setPreferredSize(new Dimension(board.windowWidth/6, board.windowHeight));
 		
 		setDiceButton();
+		setNextTurnButton();
 		setDiceImages();
 	}
 	
 	private void setDiceButton() {
-
+		
 
 		diceButton = new JButton("Würfeln");
 		this.add(diceButton);
@@ -46,6 +48,26 @@ public class BoardInformationMenu extends JPanel {
 				
 				firstDice = board.dice1value;
 				secondDice = board.dice2value;
+				
+				diceButton.setVisible(false);
+				nextTurnButton.setVisible(true);
+				
+				repaint();
+			}});
+	}
+	
+	private void setNextTurnButton() {
+		
+		nextTurnButton = new JButton("Weiter");
+		this.add(nextTurnButton);
+		nextTurnButton.setVisible(false);
+		
+		nextTurnButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				board.nextTurn();
+				
+				nextTurnButton.setVisible(false);
+				diceButton.setVisible(true);
 				
 				repaint();
 			}});
