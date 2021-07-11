@@ -1,13 +1,19 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+
+
+import sun.awt.image.BufferedImageDevice;
 
 public class Board extends JPanel{
 
@@ -25,6 +31,13 @@ public class Board extends JPanel{
 	private BufferedImage knast;
 	private BufferedImage freiParken;
 	private BufferedImage geheKnast;
+	
+	
+	private BufferedImage schiff;
+	private BufferedImage hut;
+	private BufferedImage flugzeug;
+	private BufferedImage auto;
+	
 
 	private boolean isStart = true;
 	
@@ -41,12 +54,12 @@ public class Board extends JPanel{
 	public int dice1value;
 	public int dice2value;
 	
-	public Board() {
-		players = new Player[3];
+	public Board(int NumberOfplayers) {
+		players = new Player[NumberOfplayers];
 
-		players[0] = new Player(0, "hans", "Kreis", 0);
-		players[1] = new Player(0, "Jesus", "Viereck", 0);
-		players[2] = new Player(0, "Jesus", "Viereck", 0);
+		players[0] = new Player(0, "Thomas", Player.SCHIFF, 0);
+		players[1] = new Player(0, "Michael", Player.HUT, 0);
+		players[2] = new Player(0, "Benni", Player.FLUGZEUG, 0);
 		
 		dice = new Dice();
 		
@@ -65,12 +78,19 @@ public class Board extends JPanel{
 			knast = ImageIO.read(new URL("https://www.brettspiele-report.de/images/monopoly_trauminsel/monopoly_trauminsel_eckfelder_gefaengnis.jpg"));
 			freiParken = ImageIO.read(new URL("https://i1.wp.com/www.mallorca-services.es/wp-content/uploads/FreiParken.jpg"));
 			geheKnast = ImageIO.read(new URL("http://www.rhein-zeitung.de/cms_media/module_img/1044/522467_1_popup_522467_1_org_knast.jpg"));
-
+			
+			schiff=ImageIO.read(new URL("https://image.flaticon.com/icons/png/512/37/37232.png"));
+			flugzeug=ImageIO.read(new URL("https://image.flaticon.com/icons/png/512/37/37232.png"));
+			hut=ImageIO.read(new URL("https://image.flaticon.com/icons/png/512/37/37232.png"));
+			auto=ImageIO.read(new URL("https://image.flaticon.com/icons/png/512/37/37232.png"));		//placeholders for actual images
 			
 		} catch (IOException e) {
 			// 
 			e.printStackTrace();
 		}}
+	public Board() {
+		this(3);	//default 3 players
+	}
 
 
 
@@ -195,7 +215,44 @@ public class Board extends JPanel{
 		g.drawImage(knast, fieldArray[rowSize].xPosition, fieldArray[rowSize].yPosition, longSideField, longSideField, null);
 		g.drawImage(freiParken, fieldArray[2*rowSize].xPosition, fieldArray[2*rowSize].yPosition, longSideField, longSideField, null);
 		g.drawImage(geheKnast, fieldArray[3*rowSize].xPosition, fieldArray[3*rowSize].yPosition, longSideField, longSideField, null);
-		
+		if(isStart) {
+			isStart=false; 
+			for (int j = 0; j < players.length; j++) {
+				
+			
+			switch (players[j].figure) {
+			case Player.SCHIFF:
+				
+				g.drawImage(schiff, fieldArray[0].xPosition+25, fieldArray[0].yPosition+25, 50, 50, null);
+				g.setColor(Color.pink);
+				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+35);
+				g.setColor(Color.black);
+				break;
+			case Player.HUT:
+				
+				g.drawImage(flugzeug,  fieldArray[0].xPosition+85, fieldArray[0].yPosition+25, 50, 50, null);
+				g.setColor(Color.pink);
+				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+35);
+				g.setColor(Color.black);
+			case Player.FLUGZEUG:
+				
+				g.drawImage(hut, fieldArray[0].xPosition+25, fieldArray[0].yPosition+85, 50, 50, null);
+				g.setColor(Color.pink);
+				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+95);
+				g.setColor(Color.black);
+				break;
+			case Player.AUTO:
+				System.out.println(players[j].playerName);
+				g.drawImage(auto, fieldArray[0].xPosition+85, fieldArray[0].yPosition+85, 50, 50, null);
+				g.setColor(Color.pink);
+				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+95);
+				g.setColor(Color.black);
+				break;
+			default:
+				break;
+			}
+		}
+		}
 		//Player position update
 		
 		if(isDiceRolling) {
@@ -209,7 +266,11 @@ public class Board extends JPanel{
 			players[activePlayerIndex].setPosition(players[activePlayerIndex].getPosition() + movingDistance);
 			
 			for (int i = 0; i < players.length; i++) {
-				g.fillRect(fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20, 40,40);
+				
+				g.drawImage(schiff, fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20, 50,50, null);
+				g.setColor(Color.pink);
+				g.drawString(players[i].playerName, fieldArray[players[i].getPosition()].xPosition+ fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-10);
+				g.setColor(Color.black);
 			}
 		}
 

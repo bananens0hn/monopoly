@@ -1,11 +1,14 @@
 public class Player {
 	private int position;
-	public String figure;
+	public int figure;
 	public int playerNum;
 	public String playerName;
 	public int playerBalance;
-	
-	public Player(int num, String name, String fig, int balance) {
+	public static final int SCHIFF=0;
+	public static final int HUT=1;
+	public static final int FLUGZEUG=2;
+	public static final int AUTO=3;
+	public Player(int num, String name, int fig, int balance) {
 		figure = fig;
 		playerNum = num;
 		playerName = name;
