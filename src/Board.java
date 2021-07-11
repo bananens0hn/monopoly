@@ -32,28 +32,29 @@ public class Board extends JPanel{
 	private BufferedImage freiParken;
 	private BufferedImage geheKnast;
 	
-	boolean isDiceRolling;
-	public Dice dice;
 	public Player player;
-	public JButton diceButton;
-	public boolean isStart = true;
+	private boolean isStart = true;
 	
-	private int windowHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
-	private int windowWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+	public int windowHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+	public int windowWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
 	
 	private int longSideField = windowHeight/(rowSize - 2) ;
 	private int shortSideField = windowHeight/(rowSize - 1) - longSideField*2/(rowSize - 1);
 	
+	//dice roll
+	private boolean isDiceRolling;
+	private Dice dice;
+	private int movingDistance;
+	public int dice1value;
+	public int dice2value;
 	
 	public Board() {
-		
-		player = new Player(0,"hans", "schiff", 0);
-		
 		dice = new Dice();
 		
-		setDiceButton();
+		//set size of jpanel
+		this.setPreferredSize(new Dimension(windowWidth / 4 * 3, windowHeight));
 		
-		setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		player = new Player(0,"hans", "schiff", 0);
 		
 		fieldArray = new Field[rowSize*4];
 		fieldNameArray = new String[rowSize*4];
@@ -111,24 +112,6 @@ public class Board extends JPanel{
 		fieldArray[20] = new Field(FieldInformations.values()[20].name(), 0, 0, longSideField, longSideField, 4);
 		fieldArray[30] = new Field(FieldInformations.values()[30].name(), shortSideField * (rowSize - 1) + longSideField, 0, longSideField, longSideField, 4);
 		
-	}
-	
-	private void setDiceButton() {
-		diceButton = new JButton("Würfeln");
-		
-		diceButton.setPreferredSize(new Dimension(longSideField, longSideField));
-		diceButton.setBorder(new EmptyBorder(10, 10, 10, 10));
-		
-		//würfel button onclick 
-		diceButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				isDiceRolling=true;
-				System.out.println(player.getPosition());
-				repaint();
-				
-			}});
-
-		this.add(diceButton);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -218,25 +201,34 @@ public class Board extends JPanel{
 		
 		//Player auf start setzen
 		
-		if(isStart==true) {
+		if(isStart == true) {
 			g.fillRect(fieldArray[0].xPosition+fieldArray[0].width/2-50, fieldArray[0].yPosition+fieldArray[0].height/2-50, 100,100);
 		}
 		
 		//Player position update
 		
 		if(isDiceRolling) {
+			Dice dice = new Dice();
 			
-			int x=dice.roll();
+			int x = dice.roll();
 			
-			isDiceRolling=false;
-			isStart=false;
+			isDiceRolling = false;
+			isStart = false;
 			
 			paintComponent(g);
 			
-			player.setPosition(player.getPosition()+x);
-			g.fillRect(fieldArray[player.getPosition()].xPosition+fieldArray[player.getPosition()].width/2-50, fieldArray[player.getPosition()].yPosition+fieldArray[player.getPosition()].height/2-50, 100,100);
+			player.setPosition(player.getPosition() + x);
+			g.fillRect(fieldArray[player.getPosition()].xPosition + fieldArray[player.getPosition()].width/2-50, fieldArray[player.getPosition()].yPosition + fieldArray[player.getPosition()].height/2-50, 100,100);
 			
 		}
 
+	}
+	
+	public void setDiceRolling() {
+		isDiceRolling = true;
+		movingDistance = dice.roll();
+		dice1value = dice.first;
+		dice2value = dice.second;
+		repaint();
 	}
 }

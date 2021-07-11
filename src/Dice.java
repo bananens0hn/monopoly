@@ -1,14 +1,14 @@
 import java.util.Random;
 
 public class Dice {
-	public Dice() {
-		
-	}
-	
 	
 	Random numberGenerator = new Random(); 
+	public int first;
+	public int second;
 	
 	public int roll() {
-		return numberGenerator.nextInt(6) + 1 + numberGenerator.nextInt(6) + 1;
+		first = numberGenerator.nextInt(6) + 1;
+		second = numberGenerator.nextInt(6) + 1;
+		return first + second;
 	}
 }
