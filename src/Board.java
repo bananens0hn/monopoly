@@ -56,10 +56,10 @@ public class Board extends JPanel{
 	
 	public Board(int NumberOfplayers) {
 		players = new Player[NumberOfplayers];
-
-		players[0] = new Player(0, "Thomas", Player.SCHIFF, 0);
-		players[1] = new Player(0, "Michael", Player.HUT, 0);
-		players[2] = new Player(0, "Benni", Player.FLUGZEUG, 0);
+		
+		for (int i = 0; i < NumberOfplayers; i++){
+			players[i] = new Player(0, "Benni", Player.FLUGZEUG, 0);
+		}
 		
 		dice = new Dice();
 		

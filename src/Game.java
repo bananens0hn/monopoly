@@ -4,6 +4,7 @@ public class Game extends JFrame{
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 1L;
 	JFrame frame;
 	Menu menu ;
@@ -23,7 +24,9 @@ public class Game extends JFrame{
 	}
 	
 	public void setBoard() {
-		frame.add(new GamePanel());
+		
+				
+		frame.add(new GamePanel(menu.Spieleranzahl));
 	}
 	
 }
