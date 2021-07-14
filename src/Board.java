@@ -253,28 +253,76 @@ public class Board extends JPanel{
 			}
 		}
 		}
-		//Player position update
+		
 		
 		if(isDiceRolling) {
 
 			
 			isDiceRolling = false;
 			
+			//Player position update
 			
 			paintComponent(g);
 			
-			players[activePlayerIndex].setPosition(players[activePlayerIndex].getPosition() + movingDistance);
+			players[activePlayerIndex].goForward(movingDistance);
 			
 			for (int i = 0; i < players.length; i++) {
 				
 				g.drawImage(schiff, fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20, 50,50, null);
 				g.setColor(Color.pink);
 				g.drawString(players[i].playerName, fieldArray[players[i].getPosition()].xPosition+ fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-10);
-				g.setColor(Color.black);
+				g.setColor(Color.black);				
+			}
+			
+			
+			//Miete zahlen
+			int fieldOwner = FieldInformations.values()[players[activePlayerIndex].getPosition()].getOwner();
+			
+			if(fieldOwner!= -1 && fieldOwner != activePlayerIndex) {
+					players[activePlayerIndex].decreasePlayerBalance(FieldInformations.values()[players[activePlayerIndex].getPosition()].getRent());
+					players[fieldOwner].increasePlayerBalance(FieldInformations.values()[players[activePlayerIndex].getPosition()].getRent());
+				}
 			}
 		}
 
+	
+	public boolean fieldIsBuyable() {
+		int position = players[activePlayerIndex].getPosition() + dice1value + dice2value;
+		
+		if (position > 39){
+			position = position - 38;
+		}
+		
+		//console information
+		System.out.println("---" + FieldInformations.values()[position].name() + "---");
+		
+		if( FieldInformations.values()[position].getIsBuyable() && FieldInformations.values()[position].getOwner() == -1) {
+			System.out.println("Feld kann gekauft werden");
+			
+		}else if( FieldInformations.values()[position].getOwner() != -1) {
+			System.out.println("Feld gehört " +  players[activePlayerIndex].getName());
+			
+		}else if( !FieldInformations.values()[position].getIsBuyable()) {
+			System.out.println("Feld kann nicht gekauft werden");
+		}
+		
+		//return
+		if( !FieldInformations.values()[position].getIsBuyable() || FieldInformations.values()[position].getOwner() != -1) {
+		return false;
+		} else {
+			return true;
+		}
 	}
+	
+	public void buyField() {
+		//Fehlt: Geld darf nicht negativ werden
+		
+		FieldInformations.values()[players[activePlayerIndex].getPosition()].setOwner(activePlayerIndex);
+		players[activePlayerIndex].decreasePlayerBalance(FieldInformations.values()[players[activePlayerIndex].getPosition()].getPrice());
+		
+		System.out.println("verkauft an " + players[activePlayerIndex].getName());
+	}
+	
 	
 	public void setDiceRolling() {
 		isDiceRolling = true;
@@ -290,5 +338,9 @@ public class Board extends JPanel{
 		} else {
 			activePlayerIndex = 0;
 		}
+	}
+	
+	public int getPosition() {
+		return players[activePlayerIndex].getPosition();
 	}
 }

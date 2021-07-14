@@ -16,6 +16,7 @@ public class BoardInformationMenu extends JPanel {
 	//public boolean isDiceRolling;
 	private JButton diceButton;
 	private JButton nextTurnButton;
+	private JButton buyButton;
 	private Board board;
 	
 	//dice numbers
@@ -33,13 +34,14 @@ public class BoardInformationMenu extends JPanel {
 		setDiceButton();
 		setNextTurnButton();
 		setDiceImages();
+		setBuyButton();
 	}
 	
-	private void setDiceButton() {
-		
+	private void setDiceButton() {		
 
 		diceButton = new JButton("Würfeln");
 		this.add(diceButton);
+		
 		
 		//würfel button onclick 
 		diceButton.addActionListener(new ActionListener() {
@@ -51,13 +53,33 @@ public class BoardInformationMenu extends JPanel {
 				
 				diceButton.setVisible(false);
 				nextTurnButton.setVisible(true);
+			
+				buyButton.setVisible(false);
+				if(board.fieldIsBuyable()) {
+					buyButton.setVisible(true);
+				}
 				
+				repaint();
+			}});
+		
+	}
+	
+	private void setBuyButton() {
+		buyButton = new JButton("Kaufen");
+		this.add(buyButton);
+		buyButton.setVisible(false);
+		
+		
+		
+		buyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				board.buyField();
+				buyButton.setVisible(false);
 				repaint();
 			}});
 	}
 	
 	private void setNextTurnButton() {
-		
 		nextTurnButton = new JButton("Weiter");
 		this.add(nextTurnButton);
 		nextTurnButton.setVisible(false);

@@ -55,4 +55,10 @@ public class Player {
 	public void goBack(int num) {
 		setPosition(getPosition() - num);	
 	}
+	
+	public String getName() {
+		return playerName;
+	}
+	
+	
 }
