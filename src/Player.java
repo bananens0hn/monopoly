@@ -8,11 +8,21 @@ public class Player {
 	public static final int HUT=1;
 	public static final int FLUGZEUG=2;
 	public static final int AUTO=3;
-	public Player(int num, String name, int fig, int balance) {
+	public Player(int num, int fig, int balance) {
 		figure = fig;
 		playerNum = num;
-		playerName = name;
 		playerBalance = balance;
+		
+		switch(figure) {
+		case SCHIFF: playerName="Schiff";
+		break;
+		case HUT: playerName="Hut";
+		break;
+		case FLUGZEUG: playerName = "Flugzeug";
+		break;
+		case AUTO: playerName = "Auto";
+		break;
+		}
 	}
 	
 	//Money
@@ -26,10 +36,15 @@ public class Player {
 	
 	public void increasePlayerBalance(int add) {
 		setPlayerBalance(getPlayerBalance() + add);
+		System.out.println(playerName + ": " + getPlayerBalance()+ "Geld");
 	}
 	
 	public void decreasePlayerBalance(int dec) {
 		setPlayerBalance(getPlayerBalance() - dec);
+		if (playerBalance < 0) {
+			System.out.println(playerName + "Hat verloren");
+		}
+		System.out.println(playerName + ": " + getPlayerBalance()+ "Geld");
 	}
 	
 	
