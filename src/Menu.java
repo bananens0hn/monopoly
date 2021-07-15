@@ -1,11 +1,15 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,57 +24,12 @@ public class Menu extends JPanel{
 	Game game;
 	Board board;
 	public int Spieleranzahl;
+	boolean deletall;
 	
     public Menu( Game g) {
-    	game = g;
-    	setBackground(Color.WHITE);
-    	setBorder(new EmptyBorder(10, 10, 10, 10));
-        setLayout(new GridBagLayout());
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        JPanel buttons = new JPanel(new GridBagLayout());
-        
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.NORTH;
-
-       
-
-        gbc.anchor = GridBagConstraints.CENTER;
-        gbc.fill = GridBagConstraints.HORIZONTAL; 
-        
-        //start button
-        JButton btnStart = new JButton("Start");
-        btnStart.setFont(new Font("Arial", Font.PLAIN, 40));
-      //  btnStart.setBackground(Color.RED);
-        btnStart.setPreferredSize(new Dimension(200, 100));
-        btnStart.addActionListener(new ActionListener(){
-        	  public void actionPerformed(ActionEvent e){
-        	            buttons.setVisible(false);
-        	            SubMenu();
-        	  
-
-			
-				
-			}});
-        
-        //exit button
-        JButton btnExit = new JButton("Exit");
-        btnExit.setFont(new Font("Arial", Font.PLAIN, 40));
-       //  btnExit.setBackground(Color.BLUE);
-        btnExit.setPreferredSize(new Dimension(200, 100));
-        
-        btnExit.addActionListener(new ActionListener(){
-      	  public void actionPerformed(ActionEvent e){
-      	              System.exit(ERROR);
-      	  }});
-        
-  
-        buttons.add(btnStart, gbc);
-        buttons.add(btnExit, gbc);
-        
-
-        gbc.weighty = 1;
-        add(buttons, gbc);
+    	game=g;
+    	deletall=false;
+  OGMenu();
     }
     public void SubMenu()
     {
@@ -107,8 +66,12 @@ public class Menu extends JPanel{
         btn2.addActionListener(new ActionListener(){
         	  public void actionPerformed(ActionEvent e){
         	              Spieleranzahl = 2;
-        	              game.setBoard();
-        	              buttons.setVisible(false);
+        	              deletall=true;
+        	              removeAll();
+        	              start();
+        	              
+        	             
+        	            
         	  }});
         
        
@@ -120,8 +83,10 @@ public class Menu extends JPanel{
         btn3.addActionListener(new ActionListener(){
       	  public void actionPerformed(ActionEvent e){
       	              Spieleranzahl = 3;
-      	            game.setBoard();
-  	              buttons.setVisible(false);
+      	            deletall=true;
+  	              removeAll();
+  	              start();
+  	              
       	  }});
        
         	 
@@ -133,8 +98,10 @@ public class Menu extends JPanel{
         btn4.addActionListener(new ActionListener(){
       	  public void actionPerformed(ActionEvent e){
       	              Spieleranzahl = 4;
-      	            game.setBoard();
-  	              buttons.setVisible(false);
+      	            deletall=true;
+  	              removeAll();
+  	              start();
+  	              
       	  }});
         
         JButton btnBack = new JButton("Zurück");
@@ -160,7 +127,7 @@ public class Menu extends JPanel{
         add(buttons, gbc);
     }
     private void OGMenu() {
-    	
+    	 JButton btnExit = new JButton("Exit");
     	setBackground(Color.WHITE);
     	setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new GridBagLayout());
@@ -184,15 +151,18 @@ public class Menu extends JPanel{
         btnStart.addActionListener(new ActionListener(){
         	  public void actionPerformed(ActionEvent e){
         	            buttons.setVisible(false);
+        	            deletall=true;
+        	            removeAll();
+        	            updateUI();
         	            SubMenu();
-        	  
+        	           
 
 			
 				
 			}});
         
         //exit button
-        JButton btnExit = new JButton("Exit");
+       
         btnExit.setFont(new Font("Arial", Font.PLAIN, 40));
        //  btnExit.setBackground(Color.BLUE);
         btnExit.setPreferredSize(new Dimension(200, 100));
@@ -209,5 +179,22 @@ public class Menu extends JPanel{
 
         gbc.weighty = 1;
         add(buttons, gbc);
+    }
+    public void start() {
+    	 game.setBoard();
+    	 updateUI();
+    }
+    public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
+    	try {
+			g.drawImage(ImageIO.read(new File("H:\\documents\\monpoly png\\monopoly orig.png")), 100, 100, 1280, 251, null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	if(deletall) {
+    		g.clearRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+    		deletall=false;
+    	}
     }
 }
