@@ -26,7 +26,7 @@ public class Game extends JFrame{
 	public void setBoard() {
 		
 				
-		frame.add(new GamePanel(menu.Spieleranzahl));
+		frame.add(new GamePanel(menu.Spieleranzahl, menu.Figuren));
 	}
 	
 }

@@ -54,11 +54,11 @@ public class Board extends JPanel{
 	public int dice1value;
 	public int dice2value;
 	
-	public Board(int NumberOfplayers) {
+	public Board(int NumberOfplayers, int[]Figuren) {
 		players = new Player[NumberOfplayers];
 		
 		for (int i = 0; i < NumberOfplayers; i++){
-			players[i] = new Player(0, "Benni", Player.FLUGZEUG, 0);
+			players[i] = new Player(0, "Benni", Figuren[i], 0);
 		}
 		
 		dice = new Dice();
@@ -89,7 +89,7 @@ public class Board extends JPanel{
 			e.printStackTrace();
 		}}
 	public Board() {
-		this(3);	//default 3 players
+	//	this(3);	//default 3 players
 	}
 
 
