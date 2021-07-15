@@ -1,19 +1,13 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
-
-
-import sun.awt.image.BufferedImageDevice;
 
 public class Board extends JPanel{
 
@@ -59,7 +53,7 @@ public class Board extends JPanel{
 		
 		for (int i = 0; i < NumberOfplayers; i++){
 
-			players[i] = new Player(0, "Benni", Figuren[i], 0);
+			players[i] = new Player(0, Figuren[i], 0);
 
 			if(i == 1) {
 			players[i] = new Player(0, Player.FLUGZEUG, 3000);
@@ -144,6 +138,7 @@ public class Board extends JPanel{
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
 		
 		String infoString;
 	

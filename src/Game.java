@@ -1,4 +1,8 @@
+
+import java.awt.PageAttributes.OriginType;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Game extends JFrame{
 	/**
@@ -13,6 +17,7 @@ public class Game extends JFrame{
 	
 	public Game() {
 		menu = new Menu(this);
+		
 	}
 	
 	public void setupGame() {
@@ -23,10 +28,17 @@ public class Game extends JFrame{
 		frame.setVisible(true);
 	}
 	
-	public void setBoard() {
+	public void setBoard(int spieleranzahl, int[] figuren, JPanel hurJPanel) {
 		
-				
-		frame.add(new GamePanel(menu.Spieleranzahl, menu.Figuren));
-	}
+		//panel=new GamePanel(spieleranzahl, figuren);
+		
+		System.out.println(frame.getComponentCount());
+		frame.add(new GamePanel(spieleranzahl, figuren));
+		System.out.println(frame.getComponentCount());
+		System.out.println("deine mum");
+		frame.remove(hurJPanel);
+		update(this.getGraphics());
 	
+	
+	}
 }
