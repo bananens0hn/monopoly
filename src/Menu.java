@@ -4,16 +4,20 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 
 public class Menu extends JPanel{
 
@@ -50,14 +54,12 @@ public class Menu extends JPanel{
         
         //start button
         JLabel Text = new JLabel("Spieleranzahl");
+        Text.setOpaque(true);
+        Text.setBackground(Color.WHITE);
         Text.setFont(new Font("Arial", Font.PLAIN, 60));
         Text.setPreferredSize(new Dimension(400, 100));
         
-       /* JButton btnAnzahl =new JButton("Spieleranzahl");
-        btnAnzahl.setFont(new Font("Arial", Font.PLAIN, 60));
-        btnAnzahl.setPreferredSize(new Dimension(400, 100));
-        btnAnzahl.setEnabled(false);
-        */
+     
                    
         JButton btn2 = new JButton("2");
         btn2.setFont(new Font("Arial", Font.PLAIN, 40));
@@ -68,10 +70,8 @@ public class Menu extends JPanel{
         	              Spieleranzahl = 2;
         	              deletall=true;
         	              removeAll();
-        	              start();
-        	              
-        	             
-        	            
+        	              NameMenu();
+        	              updateUI();
         	  }});
         
        
@@ -85,8 +85,8 @@ public class Menu extends JPanel{
       	              Spieleranzahl = 3;
       	            deletall=true;
   	              removeAll();
-  	              start();
-  	              
+  	              NameMenu();
+  	            updateUI();
       	  }});
        
         	 
@@ -100,8 +100,8 @@ public class Menu extends JPanel{
       	              Spieleranzahl = 4;
       	            deletall=true;
   	              removeAll();
-  	              start();
-  	              
+  	             NameMenu();
+  	             updateUI();
       	  }});
         
         JButton btnBack = new JButton("Zurück");
@@ -110,13 +110,9 @@ public class Menu extends JPanel{
           btnBack.addActionListener(new ActionListener(){
           	  public void actionPerformed(ActionEvent e){
           	      buttons.setVisible(false);       
-          		  OGMenu();
-          	             
+          		  OGMenu();          	             
           	  }});
-        
-        	 
-        	 
-        
+               
         buttons.add(Text, gbc);
         buttons.add(btn2, gbc);
         buttons.add(btn3, gbc);
@@ -197,4 +193,74 @@ public class Menu extends JPanel{
     		deletall=false;
     	}
     }
+    
+    public void NameMenu() {
+    	
+    	
+     	setBackground(Color.WHITE);
+     	setBorder(new EmptyBorder(10, 10, 10, 10));
+         setLayout(new GridBagLayout());
+         
+         JLabel text = new JLabel ("P1 Wählt");
+         text.setPreferredSize(new Dimension(200, 100));
+         text.setFont(new Font("Arial", Font.PLAIN, 40));
+         text.setOpaque(true);
+         text.setBackground(Color.white);
+     	
+     	JButton Fig1 = new JButton ("Fig1");
+     	Fig1.setPreferredSize(new Dimension(200,200));
+     	JButton Fig2 = new JButton ("Fig2");
+     	Fig2.setPreferredSize(new Dimension(200,200));
+     	JButton Fig3 = new JButton ("Fig3");
+     	Fig3.setPreferredSize(new Dimension(200,200));
+     	JButton Fig4 = new JButton ("Fig4");
+     	Fig4.setPreferredSize(new Dimension(200,200));
+     	JButton btnExit = new JButton ("Exit");
+     	  btnExit.addActionListener(new ActionListener(){
+          	  public void actionPerformed(ActionEvent e){
+          	              System.exit(ERROR);
+          	              
+          	  } } ) ;
+
+         GridBagConstraints gbc = new GridBagConstraints();
+        
+         JPanel buttons = new JPanel(new GridLayout());
+         buttons.setLayout(new GridLayout(2, 2));
+         JPanel Buttons2 = new JPanel( new GridBagLayout());
+         JPanel TextPanel = new JPanel (new GridBagLayout());
+        
+         
+         gbc.gridwidth = GridBagConstraints.REMAINDER;
+         gbc.anchor = GridBagConstraints.NORTH;
+
+        
+
+         gbc.anchor = GridBagConstraints.CENTER;
+         gbc.fill = GridBagConstraints.HORIZONTAL; 
+         
+       
+         	           
+
+ 			
+ 				
+ 		
+         
+      
+         
+   TextPanel.add(text, gbc);
+   TextPanel.setBackground(Color.white);
+   buttons.add(Fig1,gbc);
+   buttons.add(Fig2,gbc);
+   buttons.add(Fig3,gbc);
+   buttons.add(Fig4,gbc);
+   Buttons2.add(btnExit, gbc);
+         gbc.weighty = 1;
+         add(TextPanel, gbc);
+         add(buttons, gbc);
+         add(Buttons2, gbc);
+    }
 }
+     	  
+    
+
+    
