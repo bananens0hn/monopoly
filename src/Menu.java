@@ -344,5 +344,8 @@ public class Menu extends JPanel{
          add(TextPanel, gbc);
          add(buttons, gbc);
          add(Buttons2, gbc);
+         
+         // Hahalolo
+         
     }
 }    
