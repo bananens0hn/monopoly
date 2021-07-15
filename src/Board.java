@@ -58,7 +58,18 @@ public class Board extends JPanel{
 		players = new Player[NumberOfplayers];
 		
 		for (int i = 0; i < NumberOfplayers; i++){
+
 			players[i] = new Player(0, "Benni", Figuren[i], 0);
+
+			if(i == 1) {
+			players[i] = new Player(0, Player.FLUGZEUG, 3000);
+			} else if(i == 2) {
+			players[i] = new Player(0, Player.HUT, 3000);
+			}
+			else {
+				players[i] = new Player(0, Player.SCHIFF, 3000);
+			}
+
 		}
 		
 		dice = new Dice();
@@ -274,11 +285,14 @@ public class Board extends JPanel{
 				g.setColor(Color.black);				
 			}
 			
+			//Miete zahlen 
 			
-			//Miete zahlen
 			int fieldOwner = FieldInformations.values()[players[activePlayerIndex].getPosition()].getOwner();
 			
-			if(fieldOwner!= -1 && fieldOwner != activePlayerIndex) {
+			if(fieldOwner != -1 && fieldOwner != activePlayerIndex) {
+				
+				System.out.println(players[activePlayerIndex].getName() + " hat gezahlt " + FieldInformations.values()[players[activePlayerIndex].getPosition()].getRent() + "Geld an " + players[fieldOwner].getName());
+				
 					players[activePlayerIndex].decreasePlayerBalance(FieldInformations.values()[players[activePlayerIndex].getPosition()].getRent());
 					players[fieldOwner].increasePlayerBalance(FieldInformations.values()[players[activePlayerIndex].getPosition()].getRent());
 				}
@@ -315,12 +329,17 @@ public class Board extends JPanel{
 	}
 	
 	public void buyField() {
-		//Fehlt: Geld darf nicht negativ werden
 		
-		FieldInformations.values()[players[activePlayerIndex].getPosition()].setOwner(activePlayerIndex);
-		players[activePlayerIndex].decreasePlayerBalance(FieldInformations.values()[players[activePlayerIndex].getPosition()].getPrice());
+		if(players[activePlayerIndex].getPlayerBalance() >= FieldInformations.values()[players[activePlayerIndex].getPosition()].getPrice()) {
+			System.out.println("verkauft an " + players[activePlayerIndex].getName());
+			FieldInformations.values()[players[activePlayerIndex].getPosition()].setOwner(activePlayerIndex);
+			players[activePlayerIndex].decreasePlayerBalance(FieldInformations.values()[players[activePlayerIndex].getPosition()].getPrice());
+
+		}
+		else {
+			System.out.println("nicht genug Geld");
+		}
 		
-		System.out.println("verkauft an " + players[activePlayerIndex].getName());
 	}
 	
 	
