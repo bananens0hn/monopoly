@@ -216,32 +216,33 @@ public class Board extends JPanel{
 		g.drawImage(geheKnast, fieldArray[3*rowSize].xPosition, fieldArray[3*rowSize].yPosition, longSideField, longSideField, null);
 		if(isStart) {
 			isStart=false; 
+			
 			for (int j = 0; j < players.length; j++) {
 				
-			
+		
 			switch (players[j].figure) {
 			case "Schiff":
-				
+				System.out.println("draw ship");
 				g.drawImage(schiff, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+35);
 				g.setColor(Color.black);
 				break;
 			case "Hut":
-				
+				System.out.println("draw hat");
 				g.drawImage(flugzeug,  fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+35);
 				g.setColor(Color.black);
 			case "Flugzeug":
-				
+				System.out.println("draw plane");
 				g.drawImage(hut, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+95);
 				g.setColor(Color.black);
 				break;
 			case "Auto":
-				System.out.println(players[j].playerName);
+				System.out.println("draw car");
 				g.drawImage(auto, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+95);
@@ -267,7 +268,7 @@ public class Board extends JPanel{
 			
 			for (int i = 0; i < players.length; i++) {
 				
-				g.drawImage(schiff, fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20, 50,50, null);
+				g.drawImage(conv(players[i].figure), fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20, 50,50, null);
 				g.setColor(Color.black);
 				g.drawString(players[i].playerName, fieldArray[players[i].getPosition()].xPosition+ fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-10);
 				g.setColor(Color.black);				
@@ -287,7 +288,23 @@ public class Board extends JPanel{
 			}
 		}
 
-	
+	private BufferedImage conv(String figure) {
+		switch (figure) {
+		case "Schiff":
+			return schiff;
+		
+		case "Hut":
+			return hut;
+			
+		case "Flugzeug":
+			return flugzeug;
+		case "Auto":
+			return auto;
+		default:
+			break;
+		}
+		return null;
+	}
 	public boolean fieldIsBuyable() {
 		int position = players[activePlayerIndex].getPosition() + dice1value + dice2value;
 		

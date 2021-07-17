@@ -4,22 +4,19 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
+import java.util.Random;
 
 import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
+
 
 
 
@@ -34,12 +31,20 @@ public class Menu extends JPanel{
 	public int Spieleranzahl;
 	boolean deletall;
 	
+	int random;
+	
 	private String figuren[];
 	private String names[];
 	
+	Menu singleton=this;
     public Menu(Game g) {
+    	
+    	
     	game = g;
     	deletall = false;
+    	
+    	random=new Random().nextInt(11);
+    	
     	OGMenu();
     }
     
@@ -194,9 +199,13 @@ public class Menu extends JPanel{
         	 playerFigure[i].setSelectedIndex(3);
         	 playerFigure[i].addActionListener(playerFigure[i]);
         	 
+        	 //irgendwie den decided option bei den anderen rausnehmen???
+        	 
         	 buttons.add(playerLabel[i]);
         	 buttons.add(playerName[i]);
         	 buttons.add(playerFigure[i], gbc);
+        	 
+        	
          }
          
          JButton btnBack = new JButton("Zurück");
@@ -223,7 +232,8 @@ public class Menu extends JPanel{
            		buttons.setVisible(false);
 	            deletall=true;
 	            removeAll();
-	            game.setBoard(Spieleranzahl, figuren, buttons, names);        	             
+	       //   System.out.println(figuren[0]+ figuren[1]+figuren[2]+figuren[3]);
+	            game.setBoard(Spieleranzahl, figuren,singleton, names);       	 	             
            	  } 
          });
          
@@ -236,13 +246,30 @@ public class Menu extends JPanel{
    
    public void paintComponent(Graphics g) {
    	super.paintComponent(g);
+   	
+
    	try {
-			g.drawImage(ImageIO.read(new File("src/Assets/Monopoly_Logo.png")), game.windowWidth / 2 , 0, 1212 / 4 * 3, 324 / 4 * 3, null);
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		g.drawImage(ImageIO.read(new File("src/Assets/wyldes_wallpaper.jpg")), 0,0, java.awt.Toolkit.getDefaultToolkit().getScreenSize().width, java.awt.Toolkit.getDefaultToolkit().getScreenSize().height, null);
+		//just a test
+	
+   	if(random==0) {
+   		g.drawImage(ImageIO.read(new File("src/Assets/Monopoly_logo.png")), game.windowWidth / 2 +300, 0, 1212 / 4 * 3, 324 / 4 * 3, null);
+   	}else if(random==1||random==2) {
+   		g.drawImage(ImageIO.read(new File("src/Assets/monypolo.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   	}else if(random==3||random==4) {
+   		g.drawImage(ImageIO.read(new File("src/Assets/moonoply.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   	}else if(random==5||random==6) {
+   		g.drawImage(ImageIO.read(new File("src/Assets/mopolyno.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   	}else if(random==7||random==8) {
+   		g.drawImage(ImageIO.read(new File("src/Assets/moponoly.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   	}else if(random==9||random==10) {
+   		g.drawImage(ImageIO.read(new File("src/Assets/pomonoly.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   	}
+   	}
+   	catch (Exception e) {
+		// TODO: handle exception
+	}
+ 
    	if(deletall) {
    		g.clearRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
    		deletall=false;

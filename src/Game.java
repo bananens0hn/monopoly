@@ -1,6 +1,4 @@
 
-import java.awt.PageAttributes.OriginType;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,13 +26,13 @@ public class Game extends JFrame{
 		frame.setVisible(true);
 	}
 	
-	public void setBoard(int spieleranzahl, String[] figuren, JPanel hurJPanel, String[] names) {
+	public void setBoard(int spieleranzahl, String[] figuren, JPanel panelToRemove, String[] names) {
 		
-		
-		System.out.println(frame.getComponentCount());
+			
+		frame.remove(panelToRemove);			//is shit aber gets the job done???
 		frame.add(new GamePanel(spieleranzahl, figuren, names));
 		
-		frame.remove(hurJPanel);
+		
 		update(this.getGraphics());
 
 	}
