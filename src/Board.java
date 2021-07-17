@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -19,6 +20,7 @@ public class Board extends JPanel{
 	String fieldNameArray [];
 	int rowSize = 10;
 	int heightColorRectangle = 20;
+	public int NumberOfplayers;
 	
 	//corner images
 	private BufferedImage los;
@@ -48,11 +50,13 @@ public class Board extends JPanel{
 	public int dice1value;
 	public int dice2value;
 	
-	public Board(int NumberOfplayers, String []Figuren) {
+	public Board(int NumberOfPs, String []Figuren, String[] names) {
+		
+		NumberOfplayers = NumberOfPs;
 		players = new Player[NumberOfplayers];
 		
 		for (int i = 0; i < NumberOfplayers; i++){
-			players[i] = new Player(0, Figuren[i], 0);
+			players[i] = new Player(0, Figuren[i], 1000, names[i]);
 		}
 		
 		dice = new Dice();
@@ -73,10 +77,10 @@ public class Board extends JPanel{
 			freiParken = ImageIO.read(new URL("https://i1.wp.com/www.mallorca-services.es/wp-content/uploads/FreiParken.jpg"));
 			geheKnast = ImageIO.read(new URL("http://www.rhein-zeitung.de/cms_media/module_img/1044/522467_1_popup_522467_1_org_knast.jpg"));
 			
-			schiff=ImageIO.read(new URL("https://image.flaticon.com/icons/png/512/37/37232.png"));
-			flugzeug=ImageIO.read(new URL("https://image.flaticon.com/icons/png/512/37/37232.png"));
-			hut=ImageIO.read(new URL("https://image.flaticon.com/icons/png/512/37/37232.png"));
-			auto=ImageIO.read(new URL("https://image.flaticon.com/icons/png/512/37/37232.png"));		//placeholders for actual images
+			schiff = ImageIO.read(new File("src/Assets/monopolyShip.jpg"));
+			flugzeug = ImageIO.read(new File("src/Assets/dog.jpg"));
+			hut = ImageIO.read(new File("src/Assets/hut.jpg"));
+			auto = ImageIO.read(new File("src/Assets/car.jpg"));
 			
 		} catch (IOException e) {
 			// 
@@ -216,29 +220,29 @@ public class Board extends JPanel{
 				
 			
 			switch (players[j].figure) {
-			case Player.SCHIFF:
+			case "Schiff":
 				
-				g.drawImage(schiff, fieldArray[0].xPosition+25, fieldArray[0].yPosition+25, 50, 50, null);
+				g.drawImage(schiff, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+35);
 				g.setColor(Color.black);
 				break;
-			case Player.HUT:
+			case "Hut":
 				
-				g.drawImage(flugzeug,  fieldArray[0].xPosition+85, fieldArray[0].yPosition+25, 50, 50, null);
+				g.drawImage(flugzeug,  fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+35);
 				g.setColor(Color.black);
-			case Player.FLUGZEUG:
+			case "Flugzeug":
 				
-				g.drawImage(hut, fieldArray[0].xPosition+25, fieldArray[0].yPosition+85, 50, 50, null);
+				g.drawImage(hut, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+95);
 				g.setColor(Color.black);
 				break;
-			case Player.AUTO:
+			case "Auto":
 				System.out.println(players[j].playerName);
-				g.drawImage(auto, fieldArray[0].xPosition+85, fieldArray[0].yPosition+85, 50, 50, null);
+				g.drawImage(auto, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+95);
 				g.setColor(Color.black);
@@ -264,7 +268,7 @@ public class Board extends JPanel{
 			for (int i = 0; i < players.length; i++) {
 				
 				g.drawImage(schiff, fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20, 50,50, null);
-				g.setColor(Color.pink);
+				g.setColor(Color.black);
 				g.drawString(players[i].playerName, fieldArray[players[i].getPosition()].xPosition+ fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-10);
 				g.setColor(Color.black);				
 			}

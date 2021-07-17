@@ -34,7 +34,8 @@ public class Menu extends JPanel{
 	public int Spieleranzahl;
 	boolean deletall;
 	
-	public String figuren[];
+	private String figuren[];
+	private String names[];
 	
     public Menu(Game g) {
     	game = g;
@@ -172,6 +173,7 @@ public class Menu extends JPanel{
     	JTextField[] playerName = new JTextField[Spieleranzahl];
     	JComboBox[] playerFigure = new JComboBox[Spieleranzahl];
     	figuren = new String[Spieleranzahl];
+    	names = new String[Spieleranzahl];
     	
     	 GridBagLayout layout = new GridBagLayout();
     	 GridBagConstraints gbc = new GridBagConstraints();
@@ -186,12 +188,11 @@ public class Menu extends JPanel{
          
          for(int i = 0; i < Spieleranzahl; i++) {
         	 playerLabel[i] = new JLabel("Player " + (i + 1) + ": ", JLabel.TRAILING);
-        	 playerName[i] = new JTextField("Name", 30);
+        	 playerName[i] = new JTextField(30);
         	 
         	 playerFigure[i] = new JComboBox(figureString);
         	 playerFigure[i].setSelectedIndex(3);
         	 playerFigure[i].addActionListener(playerFigure[i]);
-        	 figuren[i] = figureString[i];
         	 
         	 buttons.add(playerLabel[i]);
         	 buttons.add(playerName[i]);
@@ -216,12 +217,13 @@ public class Menu extends JPanel{
            		//set figuren array
            		  for(int i = 0; i < Spieleranzahl; i++) {
            			  figuren[i] = (String) playerFigure[i].getSelectedItem();
+           			  names[i] = (String) playerName[i].getText();
            		  }
            		 
            		buttons.setVisible(false);
 	            deletall=true;
 	            removeAll();
-	            game.setBoard(Spieleranzahl, figuren, buttons);        	             
+	            game.setBoard(Spieleranzahl, figuren, buttons, names);        	             
            	  } 
          });
          

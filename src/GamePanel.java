@@ -6,8 +6,8 @@ public class GamePanel extends JPanel{
 	public BoardInformationMenu boardMenu;
 	public Board board;
 	
-	public GamePanel(int SA, String[] Figuren) {
-		board = new Board(SA, Figuren);
+	public GamePanel(int SA, String[] Figuren, String[] names) {
+		board = new Board(SA, Figuren, names);
 		boardMenu = new BoardInformationMenu(board);
 		
 		this.add(board);

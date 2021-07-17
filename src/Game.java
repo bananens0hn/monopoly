@@ -28,11 +28,11 @@ public class Game extends JFrame{
 		frame.setVisible(true);
 	}
 	
-	public void setBoard(int spieleranzahl, String[] figuren, JPanel hurJPanel) {
+	public void setBoard(int spieleranzahl, String[] figuren, JPanel hurJPanel, String[] names) {
 		
 		
 		System.out.println(frame.getComponentCount());
-		frame.add(new GamePanel(spieleranzahl, figuren));
+		frame.add(new GamePanel(spieleranzahl, figuren, names));
 		
 		frame.remove(hurJPanel);
 		update(this.getGraphics());

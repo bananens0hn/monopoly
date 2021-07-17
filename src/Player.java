@@ -1,6 +1,6 @@
 public class Player {
 	private int position;
-	public int figure;
+	public String figure;
 	public int playerNum;
 	public String playerName;
 	public int playerBalance;
@@ -9,10 +9,11 @@ public class Player {
 	public static final int FLUGZEUG=2;
 	public static final int AUTO=3;
 	
-	public Player(int num, String fig, int balance) {
+	public Player(int num, String fig, int balance, String name) {
 		playerNum = num;
 		playerBalance = balance;
-		playerName = fig;
+		playerName = name;
+		figure = fig;
 	}
 	
 	//Money
@@ -43,6 +44,7 @@ public class Player {
 		
 		if(num>39) {			//board is only 40 tiles big
 			position=num-40;
+			playerBalance += 200;
 		}else {
 			position = num;
 		}

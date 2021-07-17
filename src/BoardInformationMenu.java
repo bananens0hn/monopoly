@@ -25,9 +25,13 @@ public class BoardInformationMenu extends JPanel {
 	
 	private Rectangle rect;
 	
+	private Player[] players;
+	private String[] playerNames;
+	
 	
 	public BoardInformationMenu(Board b) {
 		board = b;
+		players = board.players;
 		
 		this.setPreferredSize(new Dimension(board.windowWidth/6, board.windowHeight));
 		
@@ -101,6 +105,10 @@ public class BoardInformationMenu extends JPanel {
 		
 	}
 	
+	private void setPlayerInformation() {
+		
+	}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -109,5 +117,12 @@ public class BoardInformationMenu extends JPanel {
 		
 		g.drawString(s1, 200, 200);
 		g.drawString(s2, 300, 200);
+		
+		//draw player information
+		for(int i = 0; i < board.NumberOfplayers; i++) {
+			g.drawString(players[i].playerName, 0, 400 + i*50);
+			g.drawString(String.valueOf(players[i].playerBalance), 100, 400 + i*50);
+		}
+		
 	}
 }
