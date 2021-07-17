@@ -5,12 +5,20 @@ import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 import javax.swing.border.EmptyBorder;
 
 
@@ -23,91 +31,23 @@ public class Menu extends JPanel{
 	private static final long serialVersionUID = 1L;
 	Game game;
 	Board board;
-	
-	Font arial;
 	public int Spieleranzahl;
 	boolean deletall;
-	public Player[] Spieler;
-	public int[] Figuren;
-	public static Menu menu;
-    public Menu( Game g) {
-    	game=g;
-    	deletall=false;
-    	arial=new Font("Arial", Font.PLAIN, 40);
-    	menu=this;
+	
+	public String figuren[];
+	
+    public Menu(Game g) {
+    	game = g;
+    	deletall = false;
     	OGMenu();
     }
-    private void OGMenu() {
-   	 JButton btnExit = new JButton("Exit");
-   	setBackground(Color.WHITE);
-   	setBorder(new EmptyBorder(10, 10, 10, 10));
-       setLayout(new GridBagLayout());
-
-       GridBagConstraints gbc = new GridBagConstraints();
-       JPanel buttons = new JPanel(new GridBagLayout());
-       
-       gbc.gridwidth = GridBagConstraints.REMAINDER;
-       gbc.anchor = GridBagConstraints.NORTH;
-
-      
-
-       gbc.anchor = GridBagConstraints.CENTER;
-       gbc.fill = GridBagConstraints.HORIZONTAL; 
-       
-       
-       
-       
-       //start button
-       JButton btnStart = new JButton("Start");
-       btnStart.setFont(arial);
-     //  btnStart.setBackground(Color.RED);
-       btnStart.setPreferredSize(new Dimension(200, 100));
-       btnStart.addActionListener(new ActionListener(){
-       	  public void actionPerformed(ActionEvent e){
-       	            buttons.setVisible(false);
-       	            deletall=true;
-       	            removeAll();
-       	            updateUI();
-       	            SubMenu();
-       	           
-
-			
-				
-			}});
-       
-       //exit button
-      
-       btnExit.setFont(arial);
-      //  btnExit.setBackground(Color.BLUE);
-       btnExit.setPreferredSize(new Dimension(200, 100));
-       
-       btnExit.addActionListener(new ActionListener(){
-     	  public void actionPerformed(ActionEvent e){
-     	              System.exit(ERROR);
-     	  }});
-
-       buttons.add(btnStart, gbc);
-       buttons.add(btnExit, gbc);
-       
-
-       gbc.weighty = 1;
-       add(buttons, gbc);
- 
-   }
-    public void SubMenu()
-    {
-    	setBackground(Color.WHITE);
-    	setBorder(new EmptyBorder(10, 10, 10, 10));
-        setLayout(new GridBagLayout());
-
+    
+    public void SubMenu() {
+    	
         GridBagConstraints gbc = new GridBagConstraints();
         JPanel buttons = new JPanel(new GridBagLayout());
         
         gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.anchor = GridBagConstraints.NORTH;
-
-       
-
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL; 
         
@@ -121,54 +61,47 @@ public class Menu extends JPanel{
      
                    
         JButton btn2 = new JButton("2");
-        btn2.setFont(arial);
-       //  btn2.setBackground(Color.BLUE);
+        btn2.setFont(new Font("Arial", Font.PLAIN, 40));
         btn2.setPreferredSize(new Dimension(200, 100));
         btn2.addActionListener(new ActionListener(){
         	  public void actionPerformed(ActionEvent e){
         	              Spieleranzahl = 2;
-        	              //deletall=true;
-        	              //removeAll();
-        	              buttons.setVisible(false);
+        	              deletall=true;
+        	              removeAll();
         	              NameMenu();
-        	              
-        	              //updateUI();
+        	              updateUI();
         	  }});
         
        
       	  
         JButton btn3 = new JButton("3");
-        btn3.setFont(arial);
-      //  btn3.setBackground(Color.RED);
+        btn3.setFont(new Font("Arial", Font.PLAIN, 40));
         btn3.setPreferredSize(new Dimension(200, 100));
         btn3.addActionListener(new ActionListener(){
       	  public void actionPerformed(ActionEvent e){
       	              Spieleranzahl = 3;
-      	              //deletall=true;
-      	              //removeAll();
-      	              buttons.setVisible(false);
-      	              NameMenu();
-  	              	  //updateUI();
+      	            deletall=true;
+  	                removeAll();
+  	                NameMenu();
+  	                updateUI();
       	  }});
        
         	 
         	  
         JButton btn4 = new JButton("4");
-        btn4.setFont(arial);
-      //  btn4.setBackground(Color.RED);
+        btn4.setFont(new Font("Arial", Font.PLAIN, 40));
         btn4.setPreferredSize(new Dimension(200, 100));
         btn4.addActionListener(new ActionListener(){
       	  public void actionPerformed(ActionEvent e){
       	              Spieleranzahl = 4;
-      	              //deletall=true;
-      	              //removeAll();
-      	              buttons.setVisible(false);
-      	              NameMenu();
-  	                  //updateUI();
+      	            deletall=true;
+  	              removeAll();
+  	             NameMenu();
+  	             updateUI();
       	  }});
         
         JButton btnBack = new JButton("Zurück");
-        btnBack.setFont(arial);
+        btnBack.setFont(new Font("Arial", Font.PLAIN, 40));
           btnBack.setPreferredSize(new Dimension(200, 100));
           btnBack.addActionListener(new ActionListener(){
           	  public void actionPerformed(ActionEvent e){
@@ -185,203 +118,136 @@ public class Menu extends JPanel{
         gbc.weighty = 1;
         add(buttons, gbc);
     }
-  public void NameMenu() {
     
-    	
-     	setBackground(Color.WHITE);
-     	setBorder(new EmptyBorder(10, 10, 10, 10));
-         setLayout(new GridBagLayout());
-         
+    private void OGMenu() {
+
+    	setBackground(Color.WHITE);
+    	setBorder(new EmptyBorder(10, 10, 10, 10));
+        setLayout(new GridBagLayout());
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        JPanel buttons = new JPanel(new GridBagLayout());
         
- 			Zug(0, true, true, true, true); 
- 			
- 		}
-  public void Zug(int i, boolean fig1, boolean fig2, boolean fig3, boolean fig4) {
-      Figuren = new int[Spieleranzahl];
- 	JLabel text = new JLabel ("P" + (i + 1) + " Wählt");
-      text.setPreferredSize(new Dimension(200, 100));
-      text.setFont(arial);
-      text.setOpaque(true);
-      text.setBackground(Color.white);
-      
-      JPanel buttons = new JPanel(new GridBagLayout());
-      GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.fill = GridBagConstraints.HORIZONTAL; 
+        
+        //start button
+        JButton btnStart = new JButton("Start");
+        
+        btnStart.setFont(new Font("Arial", Font.PLAIN, 40));
+        btnStart.setPreferredSize(new Dimension(200, 100));
+        btnStart.addActionListener(new ActionListener(){
+        	  public void actionPerformed(ActionEvent e){
+        	            buttons.setVisible(false);
+        	            deletall=true;
+        	            removeAll();
+        	            updateUI();
+        	            SubMenu();
+				
+			}});
+        
+        //exit button
+        JButton btnExit = new JButton("Exit");
+        
+        btnExit.setFont(new Font("Arial", Font.PLAIN, 40));
+        btnExit.setPreferredSize(new Dimension(200, 100));
+        
+        btnExit.addActionListener(new ActionListener(){
+      	  public void actionPerformed(ActionEvent e){
+      	              System.exit(ERROR);
+      	  }});
+        
   
-      gbc.gridwidth = GridBagConstraints.REMAINDER;
-      gbc.anchor = GridBagConstraints.NORTH;
-
-     
-
-      gbc.anchor = GridBagConstraints.CENTER;
-      gbc.fill = GridBagConstraints.HORIZONTAL; 
-      
-  	JButton btnExit = new JButton ("Exit");
-	  btnExit.addActionListener(new ActionListener(){
-     	  public void actionPerformed(ActionEvent e){
-     	              System.exit(ERROR);         	              
-     	  } } ) ;
-      
-      JButton Back = new JButton ("Zurück");
- 	   Back.addActionListener(new ActionListener() {
- 		   public void actionPerformed(ActionEvent e) {
- 			  deletall=true;
-	            removeAll();
-	            updateUI();
-	            SubMenu();
- 			   		
- 		   }  } );
-      
-      
-  	JButton Fig1 = new JButton ("Fig1");
-  	Fig1.setEnabled(fig1);
-  	Fig1.setPreferredSize(new Dimension(200,200));
-  	Fig1.addActionListener(new ActionListener() {
-  		public void actionPerformed(ActionEvent e) {
-  				if(Spieleranzahl > i + 1) { 
-  					
-  	  	              removeAll();    	  	             
-  	  	              Zug(i + 1, false, fig2, fig3 ,fig4);
-  					updateUI();
-  					Figuren[i] = 0;
-  				}
-  					
-  					if(Spieleranzahl == i + 1) {
-  					Back.setVisible(false);
-  					  buttons.setVisible(false);
-  					  btnExit.setVisible(false);
-    	  	            game.setBoard(Spieleranzahl, Figuren, menu);
-    	  	            updateUI();
-  					}
-  					
-  				
-  		} } ) ;
-  	JButton Fig2 = new JButton ("Fig2");
-  	Fig2.setEnabled(fig2);
-  	Fig2.setPreferredSize(new Dimension(200,200));
-  	Fig2.addActionListener(new ActionListener() {
-  		public void actionPerformed(ActionEvent e) {
-  				if(Spieleranzahl > i + 1) { 
-  				
-  	  	              removeAll();    	  	             
-  	  	              Zug(i + 1, fig1, false, fig3 ,fig4);
-  					updateUI();
-  					Figuren[i] = 1;
-  				}
-  					if(Spieleranzahl == i + 1 ) {
-  					
-  						Back.setVisible(false);
-    					  buttons.setVisible(false);
-    					  btnExit.setVisible(false);
-      	  	            game.setBoard(Spieleranzahl, Figuren, menu);
-      	  	            updateUI();
-    						
-    						
-  					}
-  					
-  				
-  		} } ) ;
-  	JButton Fig3 = new JButton ("Fig3");
-  	Fig3.setEnabled(fig3);
-  	Fig3.setPreferredSize(new Dimension(200,200));
-  	Fig3.addActionListener(new ActionListener() {
-  		public void actionPerformed(ActionEvent e) {
-  				if(Spieleranzahl > i + 1) { 
-  					  deletall=true;
-  	  	              removeAll();         
-  	  	              Zug(i + 1, fig1, fig2, false ,fig4);
-  					updateUI();
-  					Figuren[i] = 2;
-  				}
-  					if(Spieleranzahl == i + 1) {
-  
-  						Back.setVisible(false);
-    					  buttons.setVisible(false);
-    					  btnExit.setVisible(false);
-      	  	            game.setBoard(Spieleranzahl, Figuren, menu);
-      	  	            updateUI();
-  					}
-  					
-  				
-  		} } ) ;
-  	JButton Fig4 = new JButton ("Fig4");
-  	Fig4.setEnabled(fig4);
-  	Fig4.setPreferredSize(new Dimension(200,200));
-  	Fig4.addActionListener(new ActionListener() {
-  		public void actionPerformed(ActionEvent e) {
-  				if(Spieleranzahl > i + 1) { 
-  					  deletall=true;
-  	  	              removeAll();    	  	             
-  	  	              Zug(i + 1, fig1, fig2, fig3 ,false);
-  					updateUI();
-  					Figuren[i] = 3;
-  				}
-  					if(Spieleranzahl == i + 1) {
-  						
-  						Back.setVisible(false);
-    					  buttons.setVisible(false);
-    					  btnExit.setVisible(false);
-      	  	            game.setBoard(Spieleranzahl, Figuren, menu );
-      	  	            updateUI();
-  					// System.out.println(game.getComponentAt(getMousePosition())
-  					}
-  				
-  		} } ) ;
-  	
-  
-  	
-
-   
-     
-  
-      buttons.setLayout(new GridLayout(2, 2));
-      JPanel Buttons2 = new JPanel(new GridBagLayout());
-   // Buttons2.setLayout(new BoxLayout(Buttons2, BoxLayout.X_AXIS));
-      JPanel TextPanel = new JPanel (new GridBagLayout());
-     
-      
-      gbc.gridwidth = GridBagConstraints.REMAINDER;
-      gbc.anchor = GridBagConstraints.NORTH;
-
-     
-
-      gbc.anchor = GridBagConstraints.CENTER;
-      gbc.fill = GridBagConstraints.HORIZONTAL; 
-      
-    
-            
-TextPanel.add(text, gbc);
-TextPanel.setBackground(Color.white);
-buttons.add(Fig1,gbc);
-buttons.add(Fig2,gbc);
-buttons.add(Fig3,gbc);
-buttons.add(Fig4,gbc);
-buttons.add(btnExit, gbc);
-Buttons2.add(Back, gbc);
-Buttons2.add(btnExit, gbc);  
-	  Buttons2.setBackground(Color.white);
-      gbc.weighty = 1;
-      add(TextPanel, gbc);
-      add(buttons, gbc);
-      add(Buttons2, gbc);
-   //  System.out.println(btnExiti);
-      
- }
-  /*  public void start() {
-    	game.setBoard(Spieleranzahl, Figuren);
-    	updateUI();
-    	}*/
- 
-    public void paintComponent(Graphics g) {
-    	super.paintComponent(g);
-    	
-    	if(deletall) {
-    		g.clearRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
-    		deletall=false;
-    	}
+        buttons.add(btnStart, gbc);
+        buttons.add(btnExit, gbc);
+        
+        add(buttons, gbc);
     }
     
-  
-    
-    
+    public void NameMenu() {
+    	
+    	String[] figureString = {"Schiff", "Flugzeug", "Hut", "Auto"};
+    	JLabel[] playerLabel = new JLabel[Spieleranzahl];
+    	JTextField[] playerName = new JTextField[Spieleranzahl];
+    	JComboBox[] playerFigure = new JComboBox[Spieleranzahl];
+    	figuren = new String[Spieleranzahl];
+    	
+    	 GridBagLayout layout = new GridBagLayout();
+    	 GridBagConstraints gbc = new GridBagConstraints();
+    	 
+    	 
+    	 JPanel buttons = new JPanel(new GridBagLayout());
+    	 buttons.setBackground(Color.WHITE);
+    	 
+    	 gbc.gridwidth = GridBagConstraints.REMAINDER;
+         gbc.anchor = GridBagConstraints.CENTER;
+         gbc.fill = GridBagConstraints.VERTICAL;
+         
+         for(int i = 0; i < Spieleranzahl; i++) {
+        	 playerLabel[i] = new JLabel("Player " + (i + 1) + ": ", JLabel.TRAILING);
+        	 playerName[i] = new JTextField("Name", 30);
+        	 
+        	 playerFigure[i] = new JComboBox(figureString);
+        	 playerFigure[i].setSelectedIndex(3);
+        	 playerFigure[i].addActionListener(playerFigure[i]);
+        	 figuren[i] = figureString[i];
+        	 
+        	 buttons.add(playerLabel[i]);
+        	 buttons.add(playerName[i]);
+        	 buttons.add(playerFigure[i], gbc);
+         }
+         
+         JButton btnBack = new JButton("Zurück");
+         btnBack.setFont(new Font("Arial", Font.PLAIN, 20));
+         btnBack.setPreferredSize(new Dimension(100, 50));
+         btnBack.addActionListener(new ActionListener(){
+           	  public void actionPerformed(ActionEvent e){
+           	      buttons.setVisible(false);       
+           		  SubMenu();          	             
+           	  }
+         });
+         
+         JButton btnStart = new JButton("Start");
+         btnStart.setFont(new Font("Arial", Font.PLAIN, 20));
+         btnStart.setPreferredSize(new Dimension(100, 50));
+         btnStart.addActionListener(new ActionListener(){
+           	  public void actionPerformed(ActionEvent e){
+           		//set figuren array
+           		  for(int i = 0; i < Spieleranzahl; i++) {
+           			  figuren[i] = (String) playerFigure[i].getSelectedItem();
+           		  }
+           		 
+           		buttons.setVisible(false);
+	            deletall=true;
+	            removeAll();
+	            game.setBoard(Spieleranzahl, figuren, buttons);        	             
+           	  }
+         });
+         
+         buttons.add(btnStart, gbc);
+         buttons.add(btnBack, gbc);
+         
+         this.add(buttons, gbc);
+         
+    }
    
-}    
+   public void paintComponent(Graphics g) {
+   	super.paintComponent(g);
+   	try {
+			g.drawImage(ImageIO.read(new File("src/Assets/Monopoly_Logo.png")), game.windowWidth / 2 , 0, 1212 / 4 * 3, 324 / 4 * 3, null);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+   	if(deletall) {
+   		g.clearRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+   		deletall=false;
+   	}
+   }
+}
+     	  
+    
+
+    

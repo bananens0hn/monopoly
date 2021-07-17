@@ -8,21 +8,11 @@ public class Player {
 	public static final int HUT=1;
 	public static final int FLUGZEUG=2;
 	public static final int AUTO=3;
-	public Player(int num, int fig, int balance) {
-		figure = fig;
+	
+	public Player(int num, String fig, int balance) {
 		playerNum = num;
 		playerBalance = balance;
-		
-		switch(figure) {
-		case SCHIFF: playerName="Schiff";
-		break;
-		case HUT: playerName="Hut";
-		break;
-		case FLUGZEUG: playerName = "Flugzeug";
-		break;
-		case AUTO: playerName = "Auto";
-		break;
-		}
+		playerName = fig;
 	}
 	
 	//Money
