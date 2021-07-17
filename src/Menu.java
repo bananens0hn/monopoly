@@ -222,7 +222,7 @@ public class Menu extends JPanel{
 	            deletall=true;
 	            removeAll();
 	            game.setBoard(Spieleranzahl, figuren, buttons);        	             
-           	  }
+           	  } 
          });
          
          buttons.add(btnStart, gbc);
