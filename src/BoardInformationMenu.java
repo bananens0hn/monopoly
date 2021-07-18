@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -119,9 +120,14 @@ public class BoardInformationMenu extends JPanel {
 		g.drawString(s2, 300, 200);
 		
 		//draw player information
+		
 		for(int i = 0; i < board.NumberOfplayers; i++) {
-			g.drawString(players[i].playerName, 0, 400 + i*50);
-			g.drawString(String.valueOf(players[i].playerBalance), 100, 400 + i*50);
+			
+			g.drawRect(0, 375 + i * 50, 250, 50);
+			g.drawLine(150, 375 + i * 50, 150, 425 + i * 50);
+			g.drawString(players[i].playerName, 5, 400 + i*50);
+			g.drawString(String.valueOf(players[i].playerBalance) + " € ", 175, 400 + i*50);
+			
 		}
 		
 	}
