@@ -22,9 +22,6 @@ import javax.swing.border.EmptyBorder;
 
 public class Menu extends JPanel{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	Game game;
 	Board board;
@@ -43,7 +40,7 @@ public class Menu extends JPanel{
     	game = g;
     	deletall = false;
     	
-    	random=new Random().nextInt(11);
+    	random = new Random().nextInt(11);
     	
     	OGMenu();
     }
@@ -252,19 +249,19 @@ public class Menu extends JPanel{
 		g.drawImage(ImageIO.read(new File("src/Assets/wyldes_wallpaper.jpg")), 0,0, java.awt.Toolkit.getDefaultToolkit().getScreenSize().width, java.awt.Toolkit.getDefaultToolkit().getScreenSize().height, null);
 		//just a test
 	
-   	if(random==0) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/Monopoly_logo.png")), game.windowWidth / 2 +300, 0, 1212 / 4 * 3, 324 / 4 * 3, null);
-   	}else if(random==1||random==2) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/monypolo.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
-   	}else if(random==3||random==4) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/moonoply.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
-   	}else if(random==5||random==6) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/mopolyno.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
-   	}else if(random==7||random==8) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/moponoly.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
-   	}else if(random==9||random==10) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/pomonoly.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
-   	}
+	   	if(random==0) {
+	   		g.drawImage(ImageIO.read(new File("src/Assets/Monopoly_logo.png")), game.windowWidth / 2 +300, 0, 1212 / 4 * 3, 324 / 4 * 3, null);
+	   	} else if(random==1||random==2) {
+	   		g.drawImage(ImageIO.read(new File("src/Assets/monypolo.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+	   	} else if(random==3||random==4) {
+	   		g.drawImage(ImageIO.read(new File("src/Assets/moonoply.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+	   	} else if(random==5||random==6) {
+	   		g.drawImage(ImageIO.read(new File("src/Assets/mopolyno.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+	   	} else if(random==7||random==8) {
+	   		g.drawImage(ImageIO.read(new File("src/Assets/moponoly.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+	   	} else if(random==9||random==10) {
+	   		g.drawImage(ImageIO.read(new File("src/Assets/pomonoly.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+	   	}
    	}
    	catch (Exception e) {
 		// TODO: handle exception
