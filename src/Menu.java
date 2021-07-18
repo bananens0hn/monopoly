@@ -265,20 +265,21 @@ public class Menu extends JPanel{
 						gameCanStart=true;
 					}
 				case 4:
-					if(combined.contains("Hut")&&combined.contains("Schiff")&&combined.contains("Flugzeug")&&combined.contains("Auto")) {
+					if(combined.contains("Hut")&&combined.contains("Schiff")&&combined.contains("Flugzeug")&&combined.contains("Auto")){
 						gameCanStart=true;
 					}
 				default:
 					break;
 				}
-           		
            		 if(gameCanStart) {
+           		 System.out.println(combined);
            		buttons.setVisible(false);
 	            deletall=true;
 	            removeAll();
 	       //   System.out.println(figuren[0]+ figuren[1]+figuren[2]+figuren[3]);
-	            game.setBoard(Spieleranzahl, figuren,singleton, names);       
-           		 }else {
+	            game.setBoard(Spieleranzahl, figuren,singleton, names);   
+           		 }
+           		 else {
 					System.out.println("geht nicht");
 				}
            	  } 
