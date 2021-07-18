@@ -17,6 +17,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
+
+
 
 
 
@@ -36,14 +39,21 @@ public class Menu extends JPanel{
 	private String figuren[];
 	private String names[];
 	
+	boolean gameCanStart;
+	
+	
+	boolean start;
+	
 	Menu singleton=this;
     public Menu(Game g) {
     	
     	
     	game = g;
     	deletall = false;
-    	
+    	start=true;
     	random=new Random().nextInt(11);
+    	
+    	gameCanStart=false;
     	
     	OGMenu();
     }
@@ -112,6 +122,7 @@ public class Menu extends JPanel{
           btnBack.addActionListener(new ActionListener(){
           	  public void actionPerformed(ActionEvent e){
           	      buttons.setVisible(false);       
+          	    start=true;
           		  OGMenu();          	             
           	  }});
                
@@ -191,6 +202,8 @@ public class Menu extends JPanel{
          gbc.anchor = GridBagConstraints.CENTER;
          gbc.fill = GridBagConstraints.VERTICAL;
          
+       
+         
          for(int i = 0; i < Spieleranzahl; i++) {
         	 playerLabel[i] = new JLabel("Player " + (i + 1) + ": ", JLabel.TRAILING);
         	 playerName[i] = new JTextField(30);
@@ -201,19 +214,28 @@ public class Menu extends JPanel{
         	 
         	 //irgendwie den decided option bei den anderen rausnehmen???
         	 
+        	
+        	 
         	 buttons.add(playerLabel[i]);
         	 buttons.add(playerName[i]);
         	 buttons.add(playerFigure[i], gbc);
         	 
+        	 
+        	 
         	
          }
+         
+      
+         
+         
          
          JButton btnBack = new JButton("Zurück");
          btnBack.setFont(new Font("Arial", Font.PLAIN, 20));
          btnBack.setPreferredSize(new Dimension(100, 50));
          btnBack.addActionListener(new ActionListener(){
            	  public void actionPerformed(ActionEvent e){
-           	      buttons.setVisible(false);       
+           	      buttons.setVisible(false); 
+           	      start=false;
            		  SubMenu();          	             
            	  }
          });
@@ -224,16 +246,41 @@ public class Menu extends JPanel{
          btnStart.addActionListener(new ActionListener(){
            	  public void actionPerformed(ActionEvent e){
            		//set figuren array
+           		  String combined=null;
            		  for(int i = 0; i < Spieleranzahl; i++) {
            			  figuren[i] = (String) playerFigure[i].getSelectedItem();
            			  names[i] = (String) playerName[i].getText();
-           		  }
-           		 
+           			  combined=combined+figuren[i];
+           			  }
+           		 switch (Spieleranzahl) {
+				case 2:
+					if(!figuren[0].contentEquals(figuren[1])) {
+						gameCanStart=true;
+					}
+					break;
+				case 3:
+					if(figuren[0].contentEquals(figuren[1])||figuren[0].contentEquals(figuren[1])||figuren[0].contentEquals(figuren[2])||figuren[1].contentEquals(figuren[2])) {
+						
+					}else {
+						gameCanStart=true;
+					}
+				case 4:
+					if(combined.contains("Hut")&&combined.contains("Schiff")&&combined.contains("Flugzeug")&&combined.contains("Auto")) {
+						gameCanStart=true;
+					}
+				default:
+					break;
+				}
+           		
+           		 if(gameCanStart) {
            		buttons.setVisible(false);
 	            deletall=true;
 	            removeAll();
 	       //   System.out.println(figuren[0]+ figuren[1]+figuren[2]+figuren[3]);
-	            game.setBoard(Spieleranzahl, figuren,singleton, names);       	 	             
+	            game.setBoard(Spieleranzahl, figuren,singleton, names);       
+           		 }else {
+					System.out.println("geht nicht");
+				}
            	  } 
          });
          
@@ -243,15 +290,39 @@ public class Menu extends JPanel{
          this.add(buttons, gbc);
          
     }
+    private String conv(int i) {
+    	switch (i) {
+		case 0:
+			return "Schiff";
+		
+		case 1: 
+			return "Flugzeug";
+		case 2:
+			return "Hut";
+		case 3:
+			return "Auto";
+		default:
+			break;
+		}
+    	return null;
+    }
    
    public void paintComponent(Graphics g) {
    	super.paintComponent(g);
    	
-
+   	if(start) {
    	try {
 		g.drawImage(ImageIO.read(new File("src/Assets/wyldes_wallpaper.jpg")), 0,0, java.awt.Toolkit.getDefaultToolkit().getScreenSize().width, java.awt.Toolkit.getDefaultToolkit().getScreenSize().height, null);
 		//just a test
-	
+		
+   	}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+   	}
+   	try {
+		
+	 
    	if(random==0) {
    		g.drawImage(ImageIO.read(new File("src/Assets/Monopoly_logo.png")), game.windowWidth / 2 +300, 0, 1212 / 4 * 3, 324 / 4 * 3, null);
    	}else if(random==1||random==2) {

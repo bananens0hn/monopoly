@@ -222,27 +222,27 @@ public class Board extends JPanel{
 		
 			switch (players[j].figure) {
 			case "Schiff":
-				System.out.println("draw ship");
+			
 				g.drawImage(schiff, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+35);
 				g.setColor(Color.black);
 				break;
 			case "Hut":
-				System.out.println("draw hat");
+				
 				g.drawImage(flugzeug,  fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+35);
 				g.setColor(Color.black);
 			case "Flugzeug":
-				System.out.println("draw plane");
+			
 				g.drawImage(hut, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+95);
 				g.setColor(Color.black);
 				break;
 			case "Auto":
-				System.out.println("draw car");
+				
 				g.drawImage(auto, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
 				g.setColor(Color.pink);
 				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+95);
