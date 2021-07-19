@@ -109,11 +109,11 @@ public class Menu extends JPanel{
         btn4.setPreferredSize(new Dimension(200, 100));
         btn4.addActionListener(new ActionListener(){
       	  public void actionPerformed(ActionEvent e){
-      	              Spieleranzahl = 4;
+      	            Spieleranzahl = 4;
       	            deletall=true;
-  	              removeAll();
-  	             NameMenu();
-  	             updateUI();
+      	            removeAll();
+  	              	NameMenu();
+  	             	updateUI();
       	  }});
         
         JButton btnBack = new JButton("Zurück");

@@ -4,9 +4,17 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import sun.awt.www.content.image.gif;
 
 public class BoardInformationMenu extends JPanel {
 	
@@ -29,17 +37,22 @@ public class BoardInformationMenu extends JPanel {
 	private Player[] players;
 	private String[] playerNames;
 	
+	private BufferedImage würfel;
+	
+	private boolean drawDice;
+	private boolean buyMenuVisible;
+	
 	
 	public BoardInformationMenu(Board b) {
 		board = b;
 		players = board.players;
 		
-		this.setPreferredSize(new Dimension(board.windowWidth/6, board.windowHeight));
+		this.setPreferredSize(new Dimension(board.windowWidth/ 3, board.windowHeight));
 		
 		setDiceButton();
 		setNextTurnButton();
 		setDiceImages();
-		setBuyButton();
+		setBuyMenu();
 	}
 	
 	private void setDiceButton() {		
@@ -62,23 +75,26 @@ public class BoardInformationMenu extends JPanel {
 				buyButton.setVisible(false);
 				if(board.fieldIsBuyable()) {
 					buyButton.setVisible(true);
+					buyMenuVisible = true;
 				}
+				
+				drawDice = true;
 				
 				repaint();
 			}});
 		
 	}
 	
-	private void setBuyButton() {
+	private void setBuyMenu() {
 		buyButton = new JButton("Kaufen");
+		buyButton.setBounds(0, 650, 50, 25);
 		this.add(buyButton);
 		buyButton.setVisible(false);
-		
-		
 		
 		buyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				board.buyField();
+				buyMenuVisible = false;
 				buyButton.setVisible(false);
 				repaint();
 			}});
@@ -95,9 +111,18 @@ public class BoardInformationMenu extends JPanel {
 				
 				nextTurnButton.setVisible(false);
 				diceButton.setVisible(true);
-				
+				drawDice = false;
 				repaint();
 			}});
+		
+		// würfelbild
+				try {
+					würfel = ImageIO.read(new File("src/Assets/würfel/wuerfelaugen-1-6.png"));
+					
+				} catch (IOException e) {
+					// 
+					e.printStackTrace();
+				}
 	}
 	
 	private void setDiceImages() {
@@ -113,11 +138,61 @@ public class BoardInformationMenu extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		String s1 = String.valueOf(firstDice);
-		String s2 = String.valueOf(secondDice);
+		//würfelaugen anzeigen
 		
-		g.drawString(s1, 200, 200);
-		g.drawString(s2, 300, 200);
+		if(drawDice) {
+			switch (firstDice) {
+				case 1:
+					g.drawImage(würfel.getSubimage(0,0, 250, 250), 0, 20, null);
+					break;
+				case 2:
+					g.drawImage(würfel.getSubimage(250 + 25,0, 250, 250), 0, 20, null);
+					break;
+				case 3:
+					g.drawImage(würfel.getSubimage(500 + 50 ,0, 250, 250), 0, 20, null);
+					break;
+				case 4:
+					g.drawImage(würfel.getSubimage(750 + 75,0, 250, 250), 0, 20, null);
+					break;
+				case 5:
+					g.drawImage(würfel.getSubimage(1000 + 100,0, 250, 250), 0, 20, null);
+					break;
+				case 6:
+					g.drawImage(würfel.getSubimage(1250 + 123,0, 250, 250), 0, 20, null);
+					break;
+				default:
+					break;
+			}
+			
+			switch (secondDice) {
+				case 1:
+					g.drawImage(würfel.getSubimage(0,0, 250, 250), 270, 20, null);
+					break;
+				case 2:
+					g.drawImage(würfel.getSubimage(250 + 25,0, 250, 250), 270, 20, null);
+					break;
+				case 3:
+					g.drawImage(würfel.getSubimage(500 + 50 ,0, 250, 250), 270, 20, null);
+					break;
+				case 4:
+					g.drawImage(würfel.getSubimage(750 + 75,0, 250, 250), 270, 20, null);
+					break;
+				case 5:
+					g.drawImage(würfel.getSubimage(1000 + 100,0, 250, 250), 270, 20, null);
+					break;
+				case 6:
+					g.drawImage(würfel.getSubimage(1250 + 123,0, 250, 250), 270, 20, null);
+					break;
+				default:
+					break;
+			}
+		}
+		
+		//draw Buy menu
+		
+		if(buyMenuVisible) {
+			g.drawRect(0, 650, 400, 300);
+		}
 		
 		//draw player information
 		

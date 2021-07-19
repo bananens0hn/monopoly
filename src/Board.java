@@ -62,7 +62,7 @@ public class Board extends JPanel{
 		dice = new Dice();
 		
 		//set size of jpanel
-		this.setPreferredSize(new Dimension(windowWidth / 4 * 3, windowHeight));
+		this.setPreferredSize(new Dimension(windowWidth / 3 * 2, windowHeight));
 		
 		fieldArray = new Field[rowSize*4];
 		fieldNameArray = new String[rowSize*4];
@@ -85,7 +85,9 @@ public class Board extends JPanel{
 		} catch (IOException e) {
 			// 
 			e.printStackTrace();
-		}}
+		}
+	}
+	
 	public Board() {
 	//	this(3);	//default 3 players
 	}
@@ -99,7 +101,7 @@ public class Board extends JPanel{
 		//untere Reihe
 		
 		for (int i = 1; i < rowSize ; i++) {
-			fieldArray[i] = new Field(fieldNameArray[i], (rowSize - i - 1) * shortSideField + longSideField , (rowSize - 1) * shortSideField + longSideField, shortSideField, longSideField, 1);
+			fieldArray[i] = new Field(fieldNameArray[i], (rowSize - i - 1) * shortSideField + longSideField, (rowSize - 1) * shortSideField + longSideField, shortSideField, longSideField, 1);
 		}
 		
 		//linke Spalte
