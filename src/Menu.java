@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
 
@@ -41,7 +42,7 @@ public class Menu extends JPanel{
 	
 	boolean gameCanStart;
 	
-	
+	boolean SubMenu;
 	boolean start;
 	
 	Menu singleton=this;
@@ -59,7 +60,7 @@ public class Menu extends JPanel{
     }
     
     public void SubMenu() {
-    	
+    	SubMenu = true;
         GridBagConstraints gbc = new GridBagConstraints();
         JPanel buttons = new JPanel(new GridBagLayout());
         
@@ -78,7 +79,23 @@ public class Menu extends JPanel{
                    
         JButton btn2 = new JButton("2");
         btn2.setFont(new Font("Arial", Font.PLAIN, 40));
+        btn2.setForeground(Color.blue);
         btn2.setPreferredSize(new Dimension(200, 100));
+        btn2.setBackground(Color.CYAN);
+        btn2.setBorder(new LineBorder(Color.blue, 5));
+        btn2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            	btn2.setBackground(Color.blue);
+            	btn2.setBorder(new LineBorder(Color.CYAN, 5));
+            	 btn2.setForeground(Color.cyan);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+            	btn2.setBackground(Color.CYAN);
+            	 btn2.setBorder(new LineBorder(Color.blue, 5));
+            	 btn2.setForeground(Color.blue);
+            }
+        });
         btn2.addActionListener(new ActionListener(){
         	  public void actionPerformed(ActionEvent e){
         	              Spieleranzahl = 2;
@@ -93,6 +110,17 @@ public class Menu extends JPanel{
         JButton btn3 = new JButton("3");
         btn3.setFont(new Font("Arial", Font.PLAIN, 40));
         btn3.setPreferredSize(new Dimension(200, 100));
+        btn3.setBackground(Color.CYAN);
+        btn3.setBorder(new LineBorder(Color.blue, 5));
+        btn3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            	btn3.setBackground(Color.GREEN);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+            	btn3.setBackground(Color.CYAN);
+            }
+        });
         btn3.addActionListener(new ActionListener(){
       	  public void actionPerformed(ActionEvent e){
       	              Spieleranzahl = 3;
@@ -107,13 +135,24 @@ public class Menu extends JPanel{
         JButton btn4 = new JButton("4");
         btn4.setFont(new Font("Arial", Font.PLAIN, 40));
         btn4.setPreferredSize(new Dimension(200, 100));
+        btn4.setBackground(Color.CYAN);
+        btn4.setBorder(new LineBorder(Color.blue, 5));
+        btn4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+            	btn4.setBackground(Color.GREEN);
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+            	btn4.setBackground(Color.CYAN);
+            }
+        });
         btn4.addActionListener(new ActionListener(){
       	  public void actionPerformed(ActionEvent e){
-      	              Spieleranzahl = 4;
+      	            Spieleranzahl = 4;
       	            deletall=true;
-  	              removeAll();
-  	             NameMenu();
-  	             updateUI();
+      	            removeAll();
+  	              	NameMenu();
+  	             	updateUI();
       	  }});
         
         JButton btnBack = new JButton("Zurück");
@@ -196,7 +235,9 @@ public class Menu extends JPanel{
     	 
     	 
     	 JPanel buttons = new JPanel(new GridBagLayout());
-    	 buttons.setBackground(Color.WHITE);
+    	 buttons.setOpaque(true);
+    	 buttons.setBackground(Color.OPAQUE);
+    	
     	 
     	 gbc.gridwidth = GridBagConstraints.REMAINDER;
          gbc.anchor = GridBagConstraints.CENTER;
@@ -206,12 +247,21 @@ public class Menu extends JPanel{
          
          for(int i = 0; i < Spieleranzahl; i++) {
         	 playerLabel[i] = new JLabel("Player " + (i + 1) + ": ", JLabel.TRAILING);
+        	 playerLabel[i].setFont(new Font("Arial", Font.PLAIN, 40));
+        	 playerLabel[i].setOpaque(true);
+        	 
+           
         	 playerName[i] = new JTextField(30);
+        	 playerName[i].setFont(new Font("Arial", Font.PLAIN, 40));
+        	 playerName[i].setOpaque(true);
+          
         	 
         	 playerFigure[i] = new JComboBox(figureString);
         	 playerFigure[i].setSelectedIndex(3);
         	 playerFigure[i].addActionListener(playerFigure[i]);
-        	 
+        	 playerFigure[i].setFont(new Font("Arial", Font.PLAIN, 40));
+        	 playerFigure[i].setOpaque(true);
+        
         	 //irgendwie den decided option bei den anderen rausnehmen???
         	 
         	
@@ -219,6 +269,7 @@ public class Menu extends JPanel{
         	 buttons.add(playerLabel[i]);
         	 buttons.add(playerName[i]);
         	 buttons.add(playerFigure[i], gbc);
+        	 
         	 
         	 
         	 
@@ -231,7 +282,8 @@ public class Menu extends JPanel{
          
          JButton btnBack = new JButton("Zurück");
          btnBack.setFont(new Font("Arial", Font.PLAIN, 20));
-         btnBack.setPreferredSize(new Dimension(100, 50));
+         btnBack.setPreferredSize(new Dimension(200, 100));
+         btnBack.setFont(new Font("Arial", Font.PLAIN, 40));
          btnBack.addActionListener(new ActionListener(){
            	  public void actionPerformed(ActionEvent e){
            	      buttons.setVisible(false); 
@@ -242,7 +294,8 @@ public class Menu extends JPanel{
          
          JButton btnStart = new JButton("Start");
          btnStart.setFont(new Font("Arial", Font.PLAIN, 20));
-         btnStart.setPreferredSize(new Dimension(100, 50));
+         btnStart.setPreferredSize(new Dimension(200, 100));
+         btnStart.setFont(new Font("Arial", Font.PLAIN, 40));
          btnStart.addActionListener(new ActionListener(){
            	  public void actionPerformed(ActionEvent e){
            		//set figuren array
@@ -346,9 +399,13 @@ public class Menu extends JPanel{
    		g.clearRect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
    		deletall=false;
    	}
+   	if (SubMenu) {
+   		try {
+   			g.drawImage(ImageIO.read(new File("src/Assets/Fade.png")), 0,0, java.awt.Toolkit.getDefaultToolkit().getScreenSize().width, java.awt.Toolkit.getDefaultToolkit().getScreenSize().height, null);
+   	
+   } catch (Exception e) {
+		// TODO: handle exception
+   		}
+   	}
    }
 }
-     	  
-    
-
-    
