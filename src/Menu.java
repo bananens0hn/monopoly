@@ -236,7 +236,7 @@ public class Menu extends JPanel{
     	 
     	 JPanel buttons = new JPanel(new GridBagLayout());
     	 buttons.setOpaque(true);
-    	 buttons.setBackground(Color.OPAQUE);
+    	 buttons.setBackground(new Color(0, 0, 0, 0));
     	
     	 
     	 gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -258,7 +258,14 @@ public class Menu extends JPanel{
         	 
         	 playerFigure[i] = new JComboBox(figureString);
         	 playerFigure[i].setSelectedIndex(3);
-        	 playerFigure[i].addActionListener(playerFigure[i]);
+        	 playerFigure[i].addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					repaint();		
+					
+				}
+			});
         	 playerFigure[i].setFont(new Font("Arial", Font.PLAIN, 40));
         	 playerFigure[i].setOpaque(true);
         
