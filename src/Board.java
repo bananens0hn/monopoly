@@ -12,8 +12,13 @@ import javax.swing.JPanel;
 
 public class Board extends JPanel{
 
+	public static Color none1 = new Color(0,0,0, 0);
+	public static Color none2 = new Color(0,0,0, 0);
+	public static Color none3 = new Color(0,0,0, 0);
+	public static Color none4 = new Color(0,0,0, 0);
+	
 	public Player[] players;
-	private int activePlayerIndex = 0;
+	public int activePlayerIndex = 0;
 	
 	private static final long serialVersionUID = 1L;
 	Field fieldArray [];
@@ -46,7 +51,7 @@ public class Board extends JPanel{
 	//dice roll
 	private boolean isDiceRolling;
 	private Dice dice;
-	private int movingDistance;
+	public int movingDistance;
 	public int dice1value;
 	public int dice2value;
 	
@@ -140,69 +145,32 @@ public class Board extends JPanel{
 		for(int i = 0; i < rowSize *4; i++) {
 			infoString = FieldInformations.values()[i].name() + " \n " + FieldInformations.values()[i].price;
 			
-			switch(FieldInformations.values()[i].color) {
-			case "brown":
-				g.setColor(Color.darkGray);
+			g.setColor(FieldInformations.values()[i].color);
+			
+			switch(FieldInformations.values()[i].orientation) {
+			case 1:
 				g.fillRect(fieldArray[i].xPosition, fieldArray[i].yPosition, fieldArray[i].width, heightColorRectangle);
 				g.setColor(Color.BLACK);
 				g.drawString(infoString, fieldArray[i].xPosition, fieldArray[i].yPosition + shortSideField/2);
 				break;
-			case "lightblue":
-				g.setColor(Color.CYAN);
-				g.fillRect(fieldArray[i].xPosition, fieldArray[i].yPosition, fieldArray[i].width, heightColorRectangle);
-				g.setColor(Color.BLACK);
-				g.drawString(infoString, fieldArray[i].xPosition, fieldArray[i].yPosition + shortSideField/2);
-				break;
-			case "purple":
-				g.setColor(Color.MAGENTA);
+			case 2:
 				g.fillRect(fieldArray[i].xPosition + fieldArray[i].width - heightColorRectangle, fieldArray[i].yPosition, heightColorRectangle, fieldArray[i].height);
 				g.setColor(Color.BLACK);
 				g.drawString(infoString, 0, fieldArray[i].yPosition + shortSideField/2);
 				break;
-			case "orange":
-				g.setColor(Color.ORANGE);
-				g.fillRect(fieldArray[i].xPosition + fieldArray[i].width - heightColorRectangle, fieldArray[i].yPosition, heightColorRectangle, fieldArray[i].height);
-				g.setColor(Color.BLACK);
-				g.drawString(infoString, 0, fieldArray[i].yPosition + shortSideField/2);
-				break;
-			case "red":
-				g.setColor(Color.red);
+			case 3:
 				g.fillRect(fieldArray[i].xPosition, fieldArray[i].yPosition + fieldArray[i].height - heightColorRectangle, fieldArray[i].width, heightColorRectangle);
 				g.setColor(Color.BLACK);
 				g.drawString(infoString, fieldArray[i].xPosition, fieldArray[i].yPosition + shortSideField/2);
 				break;
-			case "yellow":
-				g.setColor(Color.YELLOW);
-				g.fillRect(fieldArray[i].xPosition, fieldArray[i].yPosition + fieldArray[i].height - heightColorRectangle, fieldArray[i].width, heightColorRectangle);
-				g.setColor(Color.BLACK);
-				g.drawString(infoString, fieldArray[i].xPosition, fieldArray[i].yPosition + shortSideField/2);
-				break;
-			case "green":
-				g.setColor(Color.GREEN);
+			case 4:
 				g.fillRect(fieldArray[i].xPosition, fieldArray[i].yPosition, heightColorRectangle, fieldArray[i].height);
 				g.setColor(Color.BLACK);
 				g.drawString(infoString, fieldArray[i].xPosition + longSideField/4 , fieldArray[i].yPosition + shortSideField/2);
 				break;
-			case "blue":
-				g.setColor(Color.BLUE);
-				g.fillRect(fieldArray[i].xPosition, fieldArray[i].yPosition, heightColorRectangle, fieldArray[i].height);
-				g.setColor(Color.BLACK);
-				g.drawString(infoString, fieldArray[i].xPosition + longSideField/4 , fieldArray[i].yPosition + shortSideField/2);
-				break;
-			case "none1":
+			case 0:
 				g.setColor(Color.BLACK);
 				g.drawString(FieldInformations.values()[i].name(), fieldArray[i].xPosition, fieldArray[i].yPosition + shortSideField/2);
-			case "none2":
-				g.setColor(Color.BLACK);
-				g.drawString(FieldInformations.values()[i].name(), 0, fieldArray[i].yPosition + shortSideField/2);
-				break;
-			case "none3":
-				g.setColor(Color.BLACK);
-				g.drawString(FieldInformations.values()[i].name(), fieldArray[i].xPosition, fieldArray[i].yPosition + shortSideField/2);
-				break;
-			case "none4":
-				g.setColor(Color.BLACK);
-				g.drawString(FieldInformations.values()[i].name(), fieldArray[i].xPosition + longSideField/4 , fieldArray[i].yPosition + shortSideField/2);
 				break;
 			}
 

@@ -1,11 +1,11 @@
 
+import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Game extends JFrame{
-	/**
-	 * 
-	 */
+	
 	
 	private static final long serialVersionUID = 1L;
 	JFrame frame;

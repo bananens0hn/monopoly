@@ -72,6 +72,8 @@ public class BoardInformationMenu extends JPanel {
 				diceButton.setVisible(false);
 				nextTurnButton.setVisible(true);
 			
+				repaint();
+				
 				buyButton.setVisible(false);
 				if(board.fieldIsBuyable()) {
 					buyButton.setVisible(true);
@@ -87,7 +89,6 @@ public class BoardInformationMenu extends JPanel {
 	
 	private void setBuyMenu() {
 		buyButton = new JButton("Kaufen");
-		buyButton.setBounds(0, 650, 50, 25);
 		this.add(buyButton);
 		buyButton.setVisible(false);
 		
@@ -96,6 +97,7 @@ public class BoardInformationMenu extends JPanel {
 				board.buyField();
 				buyMenuVisible = false;
 				buyButton.setVisible(false);
+				
 				repaint();
 			}});
 	}
@@ -108,6 +110,8 @@ public class BoardInformationMenu extends JPanel {
 		nextTurnButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				board.nextTurn();
+				
+				buyMenuVisible = false;
 				
 				nextTurnButton.setVisible(false);
 				diceButton.setVisible(true);
@@ -190,11 +194,16 @@ public class BoardInformationMenu extends JPanel {
 		
 		//draw Buy menu
 		
-		if(buyMenuVisible) {
+		if(buyMenuVisible) { 
 			g.drawRect(0, 650, 400, 300);
+			g.setColor(FieldInformations.values()[board.players[board.activePlayerIndex].getPosition()].color);
+			g.fillRect(0, 650, 400, 100);
+			g.setColor(Color.BLACK);
+			g.drawString(FieldInformations.values()[board.players[board.activePlayerIndex].getPosition()].name(), 100, 675);
 		}
 		
 		//draw player information
+		g.setColor(Color.BLACK);
 		
 		for(int i = 0; i < board.NumberOfplayers; i++) {
 			
