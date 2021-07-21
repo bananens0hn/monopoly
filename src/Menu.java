@@ -384,7 +384,6 @@ public class Menu extends JPanel{
    	}
    	try {
 		
-	 random = 0;
    	if(random==0) {
    		g.drawImage(ImageIO.read(new File("src/Assets/Monopoly_logo.png")), Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 1212 / 4 * 3 / 2, 0, 1212 / 4 * 3, 324 / 4 * 3, null);
    	}else if(random==1||random==2) {
