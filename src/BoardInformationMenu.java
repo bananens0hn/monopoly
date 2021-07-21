@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 import sun.awt.www.content.image.gif;
 
 public class BoardInformationMenu extends JPanel {
-	
+		
 	/**
 	 * 
 	 */

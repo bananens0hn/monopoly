@@ -86,15 +86,13 @@ public class Menu extends JPanel{
         btn2.setBorder(new LineBorder(Color.blue, 5));
         btn2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-            	btn2.setBackground(Color.blue);
-            	btn2.setBorder(new LineBorder(Color.CYAN, 5));
-            	 btn2.setForeground(Color.cyan);
+            	btn2.setBackground(Color.GREEN);
+            	
             }
 
             public void mouseExited(java.awt.event.MouseEvent evt) {
             	btn2.setBackground(Color.CYAN);
-            	 btn2.setBorder(new LineBorder(Color.blue, 5));
-            	 btn2.setForeground(Color.blue);
+            	
             }
         });
         btn2.addActionListener(new ActionListener(){
@@ -333,7 +331,7 @@ public class Menu extends JPanel{
 					break;
 				}
            		 if(gameCanStart) {
-           		 System.out.println(combined);
+           		
            		buttons.setVisible(false);
 	            deletall=true;
 	            removeAll();
@@ -352,22 +350,7 @@ public class Menu extends JPanel{
          this.add(buttons, gbc);
          
     }
-    private String conv(int i) {
-    	switch (i) {
-		case 0:
-			return "Schiff";
-		
-		case 1: 
-			return "Flugzeug";
-		case 2:
-			return "Hut";
-		case 3:
-			return "Auto";
-		default:
-			break;
-		}
-    	return null;
-    }
+ 
    
    public void paintComponent(Graphics g) {
    	super.paintComponent(g);
