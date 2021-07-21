@@ -10,8 +10,6 @@ public class Game extends JFrame{
 	private static final long serialVersionUID = 1L;
 	JFrame frame;
 	Menu menu ;
-	int windowWidth = 1080;
-	int windowHeight = 720;
 	
 	public Game() {
 		menu = new Menu(this);

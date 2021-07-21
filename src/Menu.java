@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -383,19 +384,19 @@ public class Menu extends JPanel{
    	}
    	try {
 		
-	 
+	 random = 0;
    	if(random==0) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/Monopoly_logo.png")), game.windowWidth / 2 +300, 0, 1212 / 4 * 3, 324 / 4 * 3, null);
+   		g.drawImage(ImageIO.read(new File("src/Assets/Monopoly_logo.png")), Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 1212 / 4 * 3 / 2, 0, 1212 / 4 * 3, 324 / 4 * 3, null);
    	}else if(random==1||random==2) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/monypolo.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   		g.drawImage(ImageIO.read(new File("src/Assets/monypolo.png")), Toolkit.getDefaultToolkit().getScreenSize().width / 2- 1212 / 4 * 3 / 2, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
    	}else if(random==3||random==4) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/moonoply.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   		g.drawImage(ImageIO.read(new File("src/Assets/moonoply.png")), Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 1212 / 4 * 3 / 2, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
    	}else if(random==5||random==6) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/mopolyno.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   		g.drawImage(ImageIO.read(new File("src/Assets/mopolyno.png")), Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 1212 / 4 * 3 / 2, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
    	}else if(random==7||random==8) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/moponoly.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   		g.drawImage(ImageIO.read(new File("src/Assets/moponoly.png")), Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 1212 / 4 * 3 / 2, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
    	}else if(random==9||random==10) {
-   		g.drawImage(ImageIO.read(new File("src/Assets/pomonoly.png")), game.windowWidth / 2 +250, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
+   		g.drawImage(ImageIO.read(new File("src/Assets/pomonoly.png")), Toolkit.getDefaultToolkit().getScreenSize().width / 2 - 1212 / 4 * 3 / 2, 50, 1212 / 4 * 3, 324 / 4 * 3, null);
    	}
    	}
    	catch (Exception e) {
