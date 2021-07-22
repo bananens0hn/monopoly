@@ -1,0 +1,18 @@
+📁Local Disk (C:)
+└📁Program Files (x86)
+⠀└📁steam
+⠀⠀└📁steamapps
+⠀⠀⠀└📁common
+⠀⠀⠀⠀└📁Counter-Strike: Global Offensive
+⠀⠀⠀⠀⠀└📁Skills
+⠀⠀⠀⠀⠀⠀└⚠️This folder is empty
+⠀⠀⠀⠀⠀└📁 Aim
+⠀⠀⠀⠀⠀⠀└⚠️This folder is empty
+📁USB (D:)
+└📁Gay Porn
+└📁CS:GO Cheats
+⠀└⠀✅AimBot
+⠀└⠀✅BhopScript
+⠀└⠀✅Aimlock
+⠀└⠀✅TriggerBot
+└⠀✅Wallhack 

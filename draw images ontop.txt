@@ -1,0 +1,40 @@
+public DisplayExample(String filename1, String filename2) {
+        imageX = 200;
+        imageY = 200;
+
+        try {
+            backgroundImage = ImageIO.read(new File(filename1));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+        //load image
+
+        try {
+            image = ImageIO.read(new File(filename2));
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+        
+       
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return backgroundImage == null ?  new Dimension(200, 200) : new Dimension(backgroundImage.getWidth(), backgroundImage.getHeight());
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D g2d = (Graphics2D) g.create();
+        if (backgroundImage != null) {
+            // Scaling is expensive, don't do it here
+            int x = (getWidth() - backgroundImage.getWidth()) / 2;
+            int y = (getHeight() - backgroundImage.getHeight()) / 2;
+            g2d.drawImage(backgroundImage, x, y, this);
+        }
+        g2d.drawImage(image, imageX, imageY, this);
+        g2d.dispose();
+    }
+}
