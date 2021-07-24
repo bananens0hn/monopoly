@@ -29,7 +29,7 @@ public class Board extends JPanel{
 	
 	//corner images
 	private BufferedImage los;
-	private BufferedImage knast;
+	private BufferedImage knast; 
 	private BufferedImage freiParken;
 	private BufferedImage geheKnast;
 	

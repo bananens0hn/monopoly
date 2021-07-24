@@ -33,7 +33,7 @@ public class BoardInformationMenu extends JPanel {
 	private int secondDice;
 	
 	private Rectangle rect;
-	
+	 
 	private Player[] players;
 	private String[] playerNames;
 	
