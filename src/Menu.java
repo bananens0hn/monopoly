@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.util.Random;
 
@@ -18,8 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
 
@@ -47,6 +47,9 @@ public class Menu extends JPanel{
 	boolean start;
 	
 	Menu singleton=this;
+	
+	int count=1;
+	
     public Menu(Game g) {
     	
     	
@@ -57,6 +60,7 @@ public class Menu extends JPanel{
     	
     	gameCanStart=false;
     	
+
     	OGMenu();
     }
     
@@ -253,7 +257,30 @@ public class Menu extends JPanel{
         	 playerName[i] = new JTextField(30);
         	 playerName[i].setFont(new Font("Arial", Font.PLAIN, 40));
         	 playerName[i].setOpaque(true);
-          
+        	 playerName[i].addKeyListener(new KeyListener() {
+				
+				@Override
+				public void keyTyped(KeyEvent e) {
+					JTextField thus=(JTextField) e.getSource();
+						if(thus.getText().length()>11) {
+							e.consume();
+					}
+			
+					
+				}
+				
+				@Override
+				public void keyReleased(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
         	 
         	 playerFigure[i] = new JComboBox(figureString);
         	 playerFigure[i].setSelectedIndex(3);
@@ -265,6 +292,7 @@ public class Menu extends JPanel{
 					
 				}
 			});
+        	 
         	 playerFigure[i].setFont(new Font("Arial", Font.PLAIN, 40));
         	 playerFigure[i].setOpaque(true);
         
@@ -304,13 +332,21 @@ public class Menu extends JPanel{
          btnStart.setFont(new Font("Arial", Font.PLAIN, 40));
          btnStart.addActionListener(new ActionListener(){
            	  public void actionPerformed(ActionEvent e){
+           		  
+           		  
            		//set figuren array
            		  String combined=null;
            		  for(int i = 0; i < Spieleranzahl; i++) {
            			  figuren[i] = (String) playerFigure[i].getSelectedItem();
            			  names[i] = (String) playerName[i].getText();
            			  combined=combined+figuren[i];
-           			  }
+           			  
+           		if(names[i].isEmpty()) {
+           			
+           			names[i]="Spieler"+String.valueOf(count);
+           			count++;
+           		}
+           		  }
            		 switch (Spieleranzahl) {
 				case 2:
 					if(!figuren[0].contentEquals(figuren[1])) {

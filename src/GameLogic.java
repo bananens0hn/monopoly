@@ -1,5 +1,7 @@
 
 public class GameLogic {
+	public int Spieleranzahl;
+	public Player[] spieler;
 public GameLogic(Board toBeInfluenced) {
 	
 }
