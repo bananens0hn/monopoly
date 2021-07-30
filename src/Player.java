@@ -4,6 +4,10 @@ public class Player {
 	public int playerNum;
 	public String playerName;
 	public int playerBalance;
+	
+	public boolean isGefängnis;
+	public int gefängnisTimer;
+	
 	public static final int SCHIFF=0;
 	public static final int HUT=1;
 	public static final int FLUGZEUG=2;
@@ -14,6 +18,9 @@ public class Player {
 		playerBalance = balance;
 		playerName = name;
 		figure = fig;
+		
+		isGefängnis=false;
+		gefängnisTimer=0;
 	}
 	
 	//Money

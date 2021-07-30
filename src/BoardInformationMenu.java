@@ -37,7 +37,7 @@ public class BoardInformationMenu extends JPanel {
 	private Player[] players;
 	private String[] playerNames;
 	
-	private BufferedImage würfel;
+	private BufferedImage wÃ¼rfel;
 	
 	private boolean drawDice;
 	private boolean buyMenuVisible;
@@ -57,11 +57,11 @@ public class BoardInformationMenu extends JPanel {
 	
 	private void setDiceButton() {		
 
-		diceButton = new JButton("Würfeln");
+		diceButton = new JButton("WÃ¼rfeln");
 		this.add(diceButton);
 		
 		
-		//würfel button onclick 
+		//wÃ¼rfel button onclick 
 		diceButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				board.setDiceRolling();
@@ -119,9 +119,9 @@ public class BoardInformationMenu extends JPanel {
 				repaint();
 			}});
 		
-		// würfelbild
+		// wÃ¼rfelbild
 				try {
-					würfel = ImageIO.read(new File("src/Assets/würfel/wuerfelaugen-1-6.png"));
+					wÃ¼rfel = ImageIO.read(new File("src/Assets/wÃ¼rfel/wuerfelaugen-1-6.png"));
 					
 				} catch (IOException e) {
 					// 
@@ -142,27 +142,27 @@ public class BoardInformationMenu extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		//würfelaugen anzeigen
+		//wÃ¼rfelaugen anzeigen
 		
 		if(drawDice) {
 			switch (firstDice) {
 				case 1:
-					g.drawImage(würfel.getSubimage(0,0, 250, 250), 0, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(0,0, 250, 250), 0, 20, null);
 					break;
 				case 2:
-					g.drawImage(würfel.getSubimage(250 + 25,0, 250, 250), 0, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(250 + 25,0, 250, 250), 0, 20, null);
 					break;
 				case 3:
-					g.drawImage(würfel.getSubimage(500 + 50 ,0, 250, 250), 0, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(500 + 50 ,0, 250, 250), 0, 20, null);
 					break;
 				case 4:
-					g.drawImage(würfel.getSubimage(750 + 75,0, 250, 250), 0, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(750 + 75,0, 250, 250), 0, 20, null);
 					break;
 				case 5:
-					g.drawImage(würfel.getSubimage(1000 + 100,0, 250, 250), 0, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(1000 + 100,0, 250, 250), 0, 20, null);
 					break;
 				case 6:
-					g.drawImage(würfel.getSubimage(1250 + 123,0, 250, 250), 0, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(1250 + 123,0, 250, 250), 0, 20, null);
 					break;
 				default:
 					break;
@@ -170,22 +170,22 @@ public class BoardInformationMenu extends JPanel {
 			
 			switch (secondDice) {
 				case 1:
-					g.drawImage(würfel.getSubimage(0,0, 250, 250), 270, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(0,0, 250, 250), 270, 20, null);
 					break;
 				case 2:
-					g.drawImage(würfel.getSubimage(250 + 25,0, 250, 250), 270, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(250 + 25,0, 250, 250), 270, 20, null);
 					break;
 				case 3:
-					g.drawImage(würfel.getSubimage(500 + 50 ,0, 250, 250), 270, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(500 + 50 ,0, 250, 250), 270, 20, null);
 					break;
 				case 4:
-					g.drawImage(würfel.getSubimage(750 + 75,0, 250, 250), 270, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(750 + 75,0, 250, 250), 270, 20, null);
 					break;
 				case 5:
-					g.drawImage(würfel.getSubimage(1000 + 100,0, 250, 250), 270, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(1000 + 100,0, 250, 250), 270, 20, null);
 					break;
 				case 6:
-					g.drawImage(würfel.getSubimage(1250 + 123,0, 250, 250), 270, 20, null);
+					g.drawImage(wÃ¼rfel.getSubimage(1250 + 123,0, 250, 250), 270, 20, null);
 					break;
 				default:
 					break;
@@ -209,8 +209,12 @@ public class BoardInformationMenu extends JPanel {
 			
 			g.drawRect(0, 375 + i * 50, 250, 50);
 			g.drawLine(150, 375 + i * 50, 150, 425 + i * 50);
+			if(i!=board.activePlayerIndex) {
 			g.drawString(players[i].playerName, 5, 400 + i*50);
-			g.drawString(String.valueOf(players[i].playerBalance) + " € ", 175, 400 + i*50);
+			}else {
+				g.drawString("â˜… "+players[i].playerName, 5, 400 + i*50);
+			}
+			g.drawString(String.valueOf(players[i].playerBalance) + " â‚¬ ", 175, 400 + i*50);
 			
 		}
 		

@@ -1,11 +1,13 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -185,7 +187,7 @@ public class Board extends JPanel{
 		g.drawImage(freiParken, fieldArray[2*rowSize].xPosition, fieldArray[2*rowSize].yPosition, longSideField, longSideField, null);
 		g.drawImage(geheKnast, fieldArray[3*rowSize].xPosition, fieldArray[3*rowSize].yPosition, longSideField, longSideField, null);
 		if(isStart) {
-			isStart=false; 
+			
 			
 			for (int j = 0; j < players.length; j++) {
 				
@@ -193,35 +195,30 @@ public class Board extends JPanel{
 			switch (players[j].figure) {
 			case "Schiff":
 			
-				g.drawImage(schiff, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
-				g.setColor(Color.pink);
-				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+35);
-				g.setColor(Color.black);
+				g.drawImage(schiff, fieldArray[0].xPosition+15, fieldArray[0].yPosition+15, 50, 50, null);
+			
+				
 				break;
 			case "Hut":
 				
-				g.drawImage(flugzeug,  fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
-				g.setColor(Color.pink);
-				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+35);
-				g.setColor(Color.black);
+				g.drawImage(flugzeug,  fieldArray[0].xPosition+15 +100, fieldArray[0].yPosition+15, 50, 50, null);
+				
 			case "Flugzeug":
 			
-				g.drawImage(hut, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
-				g.setColor(Color.pink);
-				g.drawString(players[j].playerName, fieldArray[0].xPosition+25, fieldArray[0].yPosition+95);
-				g.setColor(Color.black);
+				g.drawImage(hut, fieldArray[0].xPosition+15, fieldArray[0].yPosition+15 +100, 50, 50, null);
+				
 				break;
 			case "Auto":
 				
-				g.drawImage(auto, fieldArray[0].xPosition, fieldArray[0].yPosition, 70, 70, null);
-				g.setColor(Color.pink);
-				g.drawString(players[j].playerName, fieldArray[0].xPosition+85, fieldArray[0].yPosition+95);
-				g.setColor(Color.black);
+				g.drawImage(auto, fieldArray[0].xPosition+15 +100, fieldArray[0].yPosition+15 +100, 50, 50, null);
+				
 				break;
 			default:
 				break;
 			}
 		}
+			isStart=false; 
+			fieldArray[0].setPlayersThere(players.length);
 		}
 		
 		
@@ -234,15 +231,33 @@ public class Board extends JPanel{
 			
 			paintComponent(g);
 			
+			fieldArray[players[activePlayerIndex].getPosition()].decrementPlayersThere();
+			
 			players[activePlayerIndex].goForward(movingDistance);
 			
+			fieldArray[players[activePlayerIndex].getPosition()].incrementPlayersThere();
+			
+
+			
 			for (int i = 0; i < players.length; i++) {
-				
+				if(fieldArray[players[i].getPosition()].playersThere>1) {
+					
+					g.drawImage(conv(players[i].figure), fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20+20*i, 50,50, null);
+					System.out.println("we drawin");
+					
+					//doenst work yet
+				}
+					
+			
 				g.drawImage(conv(players[i].figure), fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20, 50,50, null);
-				g.setColor(Color.black);
 				g.drawString(players[i].playerName, fieldArray[players[i].getPosition()].xPosition+ fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-10);
-				g.setColor(Color.black);				
+				
+				
+					}
+		
+			
 			}
+		
 			
 			//Miete zahlen 
 			
@@ -255,8 +270,41 @@ public class Board extends JPanel{
 					players[activePlayerIndex].decreasePlayerBalance(FieldInformations.values()[players[activePlayerIndex].getPosition()].getRent());
 					players[fieldOwner].increasePlayerBalance(FieldInformations.values()[players[activePlayerIndex].getPosition()].getRent());
 				}
+			if(FieldInformations.values()[players[activePlayerIndex].getPosition()].name().contentEquals("GEHE_GEFÄNGNIS")) {
+				
+				System.out.println(players[activePlayerIndex].getName() + " muss ins Gefängnis");
+				fieldArray[players[activePlayerIndex].getPosition()].decrementPlayersThere();
+				players[activePlayerIndex].setPosition(10);
+				fieldArray[players[activePlayerIndex].getPosition()].incrementPlayersThere();
+				paintComponent(g);
+				boolean checkAgainst=true;
+				
+				for (int i = 0; i < players.length; i++) {
+					if(fieldArray[players[i].getPosition()].playersThere>1&&checkAgainst==true) {
+						
+						g.drawImage(conv(players[i].figure), fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20+10*fieldArray[players[i].getPosition()].playersThere, 50,50, null);
+						System.out.println("we drawin");
+						checkAgainst=false;
+						if(i==players.length-1) {
+							
+							break;
+						}else {
+							
+							i++;
+						}
+					}
+						
+				
+					g.drawImage(conv(players[i].figure), fieldArray[players[i].getPosition()].xPosition + fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-20, 50,50, null);
+					g.setColor(Color.black);
+					g.drawString(players[i].playerName, fieldArray[players[i].getPosition()].xPosition+ fieldArray[players[i].getPosition()].width/2-20, fieldArray[players[i].getPosition()].yPosition + fieldArray[players[i].getPosition()].height/2-10);
+					g.setColor(Color.black);	
+					
+						}
+				checkAgainst=true;
 			}
-		}
+			}
+		
 
 	private BufferedImage conv(String figure) {
 		switch (figure) {
